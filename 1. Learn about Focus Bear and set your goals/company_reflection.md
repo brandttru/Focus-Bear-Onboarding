@@ -12,4 +12,4 @@ This mission is important because recently a lot more people having been diagnos
 I think an app like this useful for everyone and is really inclusive with its marketing. Although I don't personally know anyone with these challenges, I am well aware of some of the challenges faced by this group and admire the mission Focus Bear aims to achieve.
 
 ### Do you personally relate to any of the challenges that Focus Bear aims to solve?
-Even though I have not been diagnosed with either ADHD or autism I do sometimes tend to give in to distractions and lose focus. I think this app can be useful to me and I will use it.
+Even though I have not been diagnosed with either ADHD or autism I do sometimes tend to give in to distractions and lose focus. For example, when I am doing an assignment and I don't feel the pressure of deadlines, I will often find myself distracted by my phone. I think Focus Bear's focus mode can help diminish any distracting thoughts that might make me want to use my phone and keep help me remain focused.

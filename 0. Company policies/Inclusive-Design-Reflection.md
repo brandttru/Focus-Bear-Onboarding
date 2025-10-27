@@ -43,8 +43,11 @@ One change I can do is be more careful with the language I use. Use language tha
 ### Read a first-person account from someone with ADHD or Autism about their experiences with productivity tools. (Hint: Look for blog posts, videos, or community discussions.)
 https://www.reddit.com/r/ProductivityApps/comments/1cq6u8y/best_productivity_and_organizational_apps_for_adhd/
 
+Interestingly, a lot of people with ADHD or autism find that using non digital tools are the most effective for ensuring productivity.
+
 ### Identify one design or communication improvement that could make Focus Bear more accessible.
 When first opening the app, I find it a bit overwhelming. Maybe we can add widgets for the features we do want since I cannot see myself using all of these.
+For example, the Overview tab has blocks for routines and tasks. I think some more customization for these would make it less overwhelming, such as removing blocks that are unused (maybe I don't use Focus Bear to track my morning/evening routine) or being able to rearrange them (I would want my most used at the top).
 
 ### Practice writing a clear, patient, and supportive response to a hypothetical user struggling with executive functioning.
-Don't give up! We are struggle sometimes and that's okay. Take your time. It's the results that matter not the method.
+Don't give up! We are struggle sometimes and that's okay. Whether its making your bed or completing your assignment. No matter how big or how small. Take your time. It's the results that matter not the method.

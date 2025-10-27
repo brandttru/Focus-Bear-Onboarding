@@ -8,18 +8,17 @@
 - Helping others out when they are struggling vs blaming others when a mistake has been made
 
 ### What does respectful communication look like in remote teams? (e.g., tone in messages, handling disagreements, responding to feedback)
-- Having camera on during video calls
-- Muting mic when not speaking
-- Messaging in a respectful tone
+Respectful communication includes being attentive during meetings (camera on, mic muted when not speaking) and using Discord for quick, polite check-ins. If a disagreement happens, I’d message the person privately on Discord to clarify rather than arguing in a group channel.
 
 ### How can you give and receive feedback professionally? (e.g., focus on actions, not people; assume good intent; ask for clarification instead of reacting defensively)
 Feedback is best acted on when the issue is clearly identified and suggestions are stated.
 It is best received in the mindset of wanting to improve. Be open to improvement.
 
+In a previous group project, I received feedback that my implementation did not meet requirements. Instead of taking it personally, I asked for calrification and some guidance as to what exactly was required. At Focus Bear, I’ll encourage feedback on pull requests and thank teammates for constructive suggestions.
+
 ## Reflection
 ### Have you ever experienced or witnessed great teamwork and professionalism? What made it effective?
-I have experienced great teamwork in my student team. My comittee is consistently putting in their all to make sure events go well.
-In particular, our dedication and our lead's leadership bringing us together is what makes it effective.
+I have experienced great teamwork in my student team. In preparation for our most recent event, the team displayed great professionalism ensuring they showed up to as many meetings as possible and if anyone was to be absent they were clear in announcing it. During the event all members were present and very collaborative and made sure the event ran as smoothly as possible. This experience taught me that communication is the foundation to good teamwork.
 
 ### What steps can you take to make sure your communication is clear, respectful, and inclusive?
 1. Be clear and direct
@@ -28,7 +27,7 @@ In particular, our dedication and our lead's leadership bringing us together is 
 4. Double check before sending
 
 ### How can you help create a positive, fun, and professional work environment?
-Engage with the environment and overall be positive and optimistic. Don't be a doomer
+Engage with the environment and overall be positive and optimistic. Don't be a doomer.
 
 ### How can you prepare effectively for meetings with supervisors and colleagues?
 1. Read meeting agenda beforehand
@@ -38,7 +37,7 @@ Engage with the environment and overall be positive and optimistic. Don't be a d
 Be communicative, respectful and always open to learning.
 
 ### How might you follow up with colleagues or supervisors if you need information/action from them? How would you escalate it further if you don't get a response and when would you escalate?
-You can send them a message or email. If there's no response I could contact someone else for a response.
+First I would message them privately on Discord. If after two days I do not receive a response, I will bring it up during a stand up or contact the team lead.
 
 ### What are some things you won't do?
 1. Won't pester people for a response

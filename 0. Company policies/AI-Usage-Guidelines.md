@@ -24,7 +24,7 @@ Stop blindly copy and pasting into AI and ensure that anything that may be sensi
 
 ## Task
 ### Identify one task you can improve using an AI tool, and try it out.
-Since I usually use lots of spreadsheets. I used AI to help me create a [spreadsheet](https://docs.google.com/spreadsheets/d/1ODJYT3Rekm9CNhDmow4rOBkdeE9J4qtTyiXYhqoLebk/edit?usp=sharing) as well as its formulas.
+Since I usually use lots of spreadsheets. I used AI to help me create a [spreadsheet](https://docs.google.com/spreadsheets/d/1ODJYT3Rekm9CNhDmow4rOBkdeE9J4qtTyiXYhqoLebk/edit?usp=sharing) as well as its formulas. This was very helpful in improving workflow as I am bad with more advanced excel formulas (specifically ones that use cells from different sheets) and as such, it would have been very difficult for me to create the spreadsheet. Using AI to help me create and troubleshoot formulas reduced that challenge and took less time to complete the spreadsheet before use.
 
 ### Review the AI-generated output critically—did it require editing or fact-checking?
 It had a lot of trouble getting the formulas correct and required a lot of attempts. The main issue seems to be how it interprets prompts. You have to be a lot more literal when talking to AI.

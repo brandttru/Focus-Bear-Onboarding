@@ -25,8 +25,13 @@ Take more breaks during work sessions - walking around or stretching.
 Using Focus Bear!
 
 ## Task
+### Adjust your laptop setup based on ergonomic best practices.
+I adjusted my monitor height so that the top is at eye level, as seen in this photo I took at eye level.
+
+![alt text](../images/monitor_setup.png)
+
 ### Identify at least one piece of equipment that could improve your posture and comfort.
-Standing desk - I already have one, but could be using it more effectively
+Standing desk - I already have one, but could be using it more effectively such as by standin more often
 
 ### Document at least one workspace change or habit adjustment you made.
-Used Focus Bear!!!
+Adjusting the monitor height has forced me to sit up right when looking at my monitor. My neck and back no longer slouch and I find that I can sit down for longer without any soreness.

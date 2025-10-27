@@ -13,3 +13,8 @@ I will aim to follow this schedule and if necessary, will work outside of these 
 
 ## Location
 I will be working at home on my desktop computer.
+
+## Focus Bear Usage
+I have started using the Focus Bear app to track my sessions.
+
+![alt text](../images/focus_bear_proof.png)

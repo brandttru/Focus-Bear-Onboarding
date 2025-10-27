@@ -49,4 +49,6 @@ Some common mistakes are:
 One practice I can do is to keep my devices and software updated to ensure full support of my device and software against any potential threats.
 
 ### Document at least one key learning or security measure you will implement.
-Schedule an occassional clean up of storage to ensure no unused traces of data can be found.
+Schedule a monthly clean up of storage to ensure no unused traces of data can be found. This will be done using PC Manager, where I will delete old unused files and scan for threats.
+
+![alt text](../images/pc_manager.png)

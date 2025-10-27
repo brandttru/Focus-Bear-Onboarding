@@ -34,6 +34,8 @@ Password managers should be used as they encourage unique passwords across accou
 ### What security measures do you currently follow, and where can you improve?
 Currently I use 2FA whenever possible and create strong passwords using a mix of different characters. I sometimes am prone to reusing passwords and can definitely use a password manager to improve this.
 
+![alt text](../images/2FA.png)
+
 ### How can you make secure behaviour a habit rather than an afterthought?
 Habit can only be developed through knowledge of the issue. Once you know about the dangers of something you can take the steps to mitigate it.
 
@@ -45,4 +47,6 @@ Attempt to regain access to my account, change passwords, and if necessary (such
 
 ## Task
 ### Document one new cyber security habit you will follow at Focus Bear.
-I will follow locking devices when away from them and set up auto lock.
+I will follow locking devices when away from them and set up auto lock and set up auto lock on them.
+
+![alt text](../images/auto_lock.png)
