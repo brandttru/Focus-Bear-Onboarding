@@ -27,5 +27,10 @@ Kanban helps visualise the progress of tasks. It helps developers focus on fewer
 Kanban can help break down tasks into smaller subtasks, helping chip away at the entire task and reducing the burden of starting such a large task.
 
 ## Task
+### Check out Focus Bear’s Kanban board and note how tasks are structured. (Hint: Look in GitHub Projects.)
+I don't have access to Focus Bear's Kanban board but I was able to make my [own](https://github.com/users/brandttru/projects/1) and experimented with making an issue and moving it around the board.
+
+![alt text](Images/test_kanban.png)
+
 ### Identify one way you can improve task tracking in your role.
 I need to remember to consistently use the Kanban Board, making changes according to updates in task progress no matter how little. By getting into this habit, I can then get used to ensuring task tracking is done consistently and accurately.

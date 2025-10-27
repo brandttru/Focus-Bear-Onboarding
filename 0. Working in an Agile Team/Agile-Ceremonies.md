@@ -24,5 +24,8 @@ Ceremonies can ensure that teams are aware of what each other are doing and keep
 Daily stand ups are important for developers, as development is a continuous progress that requires the effort of many people. Due to some features being coupled with others, developers must be in constant contact with each other to ensure smooth workflow during sprints.
 
 ## Task
+### Attend a stand-up meeting and observe how updates are shared.
+I attended a stand up on 17/10/2025, where I saw developers discuss their tasks and also discuss the tasks within the backlog and currently on the Kanban board. I personally shared that I was just getting started with the onboarding tasks.
+
 ### Document one change you can make to improve your team collaboration.
-Attending stand ups will be useful to me for improving team collaboration.
+Attending stand ups will be useful to me for improving team collaboration. I will also come into stand ups with a list of key things I want to discuss/ask so that I immediately know what to discuss.
