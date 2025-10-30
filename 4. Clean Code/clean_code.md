@@ -50,7 +50,7 @@ print(result)
 
 # Naming Variables & Functions
 ### Find examples of unclear variable names in an existing codebase (or write your own).
-Using the same example from beofre
+Using the same example from before
 ```
 def x(a, b):
     if a > b:
@@ -82,3 +82,108 @@ When working with large code bases, it can be hard to keep track of variables as
 
 ### How did refactoring improve code readability?
 Refactoring made it easier to read and keep track of whats happening in the code. In the original code, it is hard to initially figure out what the function was trying to do as well as what was happening with the parameters. Refactoring made it easier for me understand what was the original intention and keep track of what was happening to the parameters throughout the function.
+
+# Writing Small, Focused Functions
+### Find an example of a long, complex function in an existing codebase (or write your own).
+Generated using ChatGPT
+```
+def process_orders(orders, inventory, discount_codes, shipping_rates):
+    total_revenue = 0
+    shipped_orders = []
+    for order in orders:
+        order_total = 0
+        for item in order['items']:
+            if item['id'] in inventory and inventory[item['id']] > 0:
+                price = item['price']
+                quantity = item['quantity']
+                if item['id'] in discount_codes:
+                    price *= 0.9  # apply discount
+                if quantity > inventory[item['id']]:
+                    quantity = inventory[item['id']]
+                inventory[item['id']] -= quantity
+                order_total += price * quantity
+            else:
+                print(f"Item {item['id']} is out of stock")
+        if order_total > 100:
+            shipping_cost = 0
+        else:
+            shipping_cost = shipping_rates.get(order['region'], 10)
+        order_total += shipping_cost
+        total_revenue += order_total
+        if order_total > 0:
+            shipped_orders.append({
+                'order_id': order['id'],
+                'total': order_total,
+                'items': order['items'],
+                'shipping': shipping_cost
+            })
+    print(f"Processed {len(shipped_orders)} orders, total revenue: {total_revenue}")
+    return shipped_orders, total_revenue
+```
+
+### Refactor it into multiple smaller functions with clear responsibilities.
+```
+def apply_discount(item, discount_codes):
+    """Calculate price after discount if applicable."""
+    price = item['price']
+    if item['id'] in discount_codes:
+        price *= 0.9  # 10% discount
+    return price
+
+def adjust_quantity(item, inventory):
+    """Ensure the quantity does not exceed inventory and update stock."""
+    available = inventory.get(item['id'], 0)
+    quantity = min(item['quantity'], available)
+    inventory[item['id']] = available - quantity
+    return quantity
+
+def calculate_order_total(order, inventory, discount_codes):
+    """Calculate total cost of items in the order."""
+    total = 0
+    for item in order['items']:
+        if inventory.get(item['id'], 0) > 0:
+            price = apply_discount(item, discount_codes)
+            quantity = adjust_quantity(item, inventory)
+            total += price * quantity
+        else:
+            print(f"Item {item['id']} is out of stock")
+    return total
+
+def calculate_shipping(order_total, region, shipping_rates):
+    """Determine shipping cost based on total and region."""
+    if order_total > 100:
+        return 0
+    return shipping_rates.get(region, 10)
+
+def process_orders(orders, inventory, discount_codes, shipping_rates):
+    """Process a list of orders and return shipped orders with total revenue."""
+    total_revenue = 0
+    shipped_orders = []
+
+    for order in orders:
+        order_total = calculate_order_total(order, inventory, discount_codes)
+        shipping_cost = calculate_shipping(order_total, order['region'], shipping_rates)
+        order_total += shipping_cost
+        total_revenue += order_total
+
+        if order_total > 0:
+            shipped_orders.append({
+                'order_id': order['id'],
+                'total': order_total,
+                'items': order['items'],
+                'shipping': shipping_cost
+            })
+
+    print(f"Processed {len(shipped_orders)} orders, total revenue: {total_revenue}")
+    return shipped_orders, total_revenue
+```
+
+### Why is breaking down functions beneficial?
+Breaking down functions is good because:
+- It is easier to read
+- Easier to make changes to smaller individual functions than one huge one
+- Smaller functions can be tested
+- Small functions can be reused in other parts of code
+
+### How did refactoring improve the structure of the code?
+It made the function overall have less responsiblity, insteading breaking it up into difference sections that can then be reused in other parts of code. It also made it easier to read and maintain as well. At first I had no idea what exactly was happening in process_orders, but once it was broken up I understood what steps were needed to process an order. This is great for collaboration as you want other people to be able to quickly understand your code and get working on it.
