@@ -12,3 +12,5 @@ This makes it so that users can easily separate what changes have been made per 
 
 ### When would you want to stage changes without committing?
 A recent example of mine was when I was working on an assignment and after finishing a task I started another. However, I found an issue with the task I just finished and went back to fix it. If I then commit all my files I would have two files from two different tasks in the same commit and committing them together would make it harder to track the history of them. As such, I staged one and committed that to ensure a clear divide between the commits and what changes have been made within them.
+
+# Creating & Reviewing Pull Requests
