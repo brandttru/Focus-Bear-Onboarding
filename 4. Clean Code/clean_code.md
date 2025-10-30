@@ -46,3 +46,39 @@ def difference(num1, num2):
 
 result = difference(10, 3)
 print(result)
+```
+
+# Naming Variables & Functions
+### Find examples of unclear variable names in an existing codebase (or write your own).
+Using the same example from beofre
+```
+def x(a, b):
+    if a > b:
+        return a - b
+    else:
+        return b - a
+
+y = x(10, 3)
+print(y)
+```
+
+### Refactor the code by renaming variables/functions for better clarity.
+```
+def difference(num1, num2):
+    if num1 > num2:
+        return num1 - num2
+    else:
+        return num2 - num1
+
+result = difference(10, 3)
+print(result)
+```
+
+### What makes a good variable or function name?
+A good variable is one that is easy to understand by anyone, not just the person working on it. It also makes it clear what it represents. In the previous example the function is used to find the difference between two numbers. "x" does not tell me what its supposed to do, whereas "difference" tells me it finds the difference between two numbers.
+
+### What issues can arise from poorly named variables?
+When working with large code bases, it can be hard to keep track of variables as they are constantly changing throughout the code. Without meaningful names, it can be very hard to debug. For example you might see that variable "h" is returning null, but what is "h"? Having proper names removes this issue entirely.
+
+### How did refactoring improve code readability?
+Refactoring made it easier to read and keep track of whats happening in the code. In the original code, it is hard to initially figure out what the function was trying to do as well as what was happening with the parameters. Refactoring made it easier for me understand what was the original intention and keep track of what was happening to the parameters throughout the function.
