@@ -259,3 +259,30 @@ def check_number(num):
 ```
 
 Refactoring has made it a lot simpler, removing the nested ifs and also the unnecessary conditions. From the refactored version it is easier to see that numbers greater than 0 are positive, numbers smaller than 0 are negative and that if its neither than it will be "Zero". This removes the implication from having the unnecessary coniditon and makes it easier to understand what the conditions are.
+
+# Commenting & Documentation
+### Find an example of poorly commented code and rewrite the comments to be more useful.
+This is poor documentation
+```
+def calc(x, y):
+    # do stuff
+    result = x * y + 10  # calculate
+    return result  # return it
+```
+
+Can be improved by
+```
+def calc(x, y):
+    ```
+    Multiply x and y, then add 10 to the result
+    ```
+    result = x * y + 10
+    return result
+```
+This is improved as it clearly defines what the function does and does not include unnecessary comments
+
+### When should you add comments?
+Comments should only be added when necessary. Such as when it may be hard to understand what part of the code is doing what or it is unclear why you do something. They shouldn't constantly be used as it will reduce readability of code.
+
+### When should you avoid comments and instead improve the code?
+When you find that you have to constantly comment so that you can understand the code, then you should consider whether there is an easier way to code your design. An example is if you have a complex function that can be broken up into other functions. The names of these functions can help describe what is going on rather than just relying on a large function with comments in it. Another time you should improve code is if you are using magic numbers/strings since you can use named variables instead of using comments to describe the values used (this also has the added bonus of making refactoring and bug fixing easier).
