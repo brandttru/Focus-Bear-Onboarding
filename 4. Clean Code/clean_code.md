@@ -187,3 +187,44 @@ Breaking down functions is good because:
 
 ### How did refactoring improve the structure of the code?
 It made the function overall have less responsiblity, insteading breaking it up into difference sections that can then be reused in other parts of code. It also made it easier to read and maintain as well. At first I had no idea what exactly was happening in process_orders, but once it was broken up I understood what steps were needed to process an order. This is great for collaboration as you want other people to be able to quickly understand your code and get working on it.
+
+# Avoiding Code Duplication
+### Research the "Don't Repeat Yourself" (DRY) principle.
+DRY refers to the expectation that you minimise copying code throughout a codebase. It ensures that code is cleaner, simplier to read and more flexible in terms of extension.
+
+### Example of DRY code
+Generated using ChatGPT
+```
+# Calculate area of rectangles
+length1, width1 = 5, 10
+area1 = length1 * width1
+print(f"Area 1: {area1}")
+
+length2, width2 = 7, 3
+area2 = length2 * width2
+print(f"Area 2: {area2}")
+
+length3, width3 = 2, 8
+area3 = length3 * width3
+print(f"Area 3: {area3}")
+```
+
+### What were the issues with duplicated code?
+The reason why this code violates DRY is that it copy and pastes the same code while only making minimal changes. This can be problematic as if I wanted to calculate areas of other rectangles I would have to copy and paste again. This is inefficient and will take up more space than necessary.
+
+### How did refactoring improve maintainability?
+```
+def rectangle_area(length, width):
+    return length * width
+
+areas = [
+    rectangle_area(5, 10),
+    rectangle_area(7, 3),
+    rectangle_area(2, 8)
+]
+
+for i, area in enumerate(areas, start=1):
+    print(f"Area {i}: {area}")
+```
+
+The refractored version is a lot more maintainable because it now uses a function meaning that it is open to extension. It being open to extension means that it is easier to maintain and use in future. It will also be easier to debug, since if there were an issue with the original code you would have to go back and fix all instances of the copied code. Instead, by having one instance of the code bug fixes only need to be made once.
