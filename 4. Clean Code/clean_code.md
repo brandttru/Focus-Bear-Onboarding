@@ -286,3 +286,42 @@ Comments should only be added when necessary. Such as when it may be hard to und
 
 ### When should you avoid comments and instead improve the code?
 When you find that you have to constantly comment so that you can understand the code, then you should consider whether there is an easier way to code your design. An example is if you have a complex function that can be broken up into other functions. The names of these functions can help describe what is going on rather than just relying on a large function with comments in it. Another time you should improve code is if you are using magic numbers/strings since you can use named variables instead of using comments to describe the values used (this also has the added bonus of making refactoring and bug fixing easier).
+
+# Handling Errors & Edge Cases
+### Research strategies for handling errors and edge cases in code (include Guard Clauses).
+- Guard Clauses
+    - Checks at the start of a function to handle invalid inputs or edge cases
+- Input validation
+    - Checks if input is valid before proceeding with function
+- Try-Catch/Try-Except
+    - Handles exceptions and prevent crashes 
+- Default values
+    - Provides default values to avoid error 
+
+### Find an existing function that doesn’t properly handle errors or invalid inputs.
+```
+def divide_numbers(a, b):
+    return a / b
+```
+
+### What was the issue with the original code?
+The issue with this code is that it does not handle errors properly and can crash the system. For example, if you input b=0 then you cannot divide by 0 and the code will crash.
+
+### Refactor the function to improve error handling.
+```
+def divide_numbers(a, b):
+    # Guard clauses: check for invalid inputs
+    if not isinstance(a, (int, float)):
+        raise TypeError(f"Invalid input: a must be a number, got {type(a).__name__}")
+    if not isinstance(b, (int, float)):
+        raise TypeError(f"Invalid input: b must be a number, got {type(b).__name__}")
+    if b == 0:
+        raise ValueError("Division by zero is not allowed")
+
+    # Safe division
+    return a / b
+```
+The code now is able to check for if inputs are numbers, as well as if b=0, thus preventing any chance of the code crashing
+
+### How does handling errors improve reliability?
+Handling errors makes code more reliable as it can provide predictable behaviour. In the example, a user would expect the system to not be able to divide by 0 and thus by having that error handling, a user's experience is not affected as it was the expected behaviour. It can also make debugging easier when we know where errors could occur and what errors specifically.
