@@ -228,3 +228,34 @@ for i, area in enumerate(areas, start=1):
 ```
 
 The refractored version is a lot more maintainable because it now uses a function meaning that it is open to extension. It being open to extension means that it is easier to maintain and use in future. It will also be easier to debug, since if there were an issue with the original code you would have to go back and fix all instances of the copied code. Instead, by having one instance of the code bug fixes only need to be made once.
+
+# Refactoring Code for Simplicity
+### Find an example of overly complicated code in an existing project (or write your own).
+Generated using ChatGPT
+```
+def check_number(num):
+    if num > 0:
+        return "Positive"
+    else:
+        if num < 0:
+            return "Negative"
+        else:
+            if num == 0:
+                return "Zero"
+```
+
+### What made the original code complex?
+This is more complex than necessary because it is over engineered. There are unnecessary conditions in the if statements (having conditions for all the ifs implies another condition that satisfies none of the ifs) and also unnecessary nested if. This makes it harder to read the code and in more complex code can make it harder to understand, hindering development process.
+
+### How did refactoring improve it?
+```
+def check_number(num):
+    if num > 0:
+        return "Positive"
+    elif num < 0:
+        return "Negative"
+    else:
+        return "Zero"
+```
+
+Refactoring has made it a lot simpler, removing the nested ifs and also the unnecessary conditions. From the refactored version it is easier to see that numbers greater than 0 are positive, numbers smaller than 0 are negative and that if its neither than it will be "Zero". This removes the implication from having the unnecessary coniditon and makes it easier to understand what the conditions are.
