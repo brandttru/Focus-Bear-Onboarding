@@ -1,0 +1,36 @@
+# Geenerated by ChatGPT
+name: Markdown Lint and Spell Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'        # only run on markdown files changed
+
+jobs:
+  lint-and-spellcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install markdownlint-cli and markdown-spellcheck
+      run: |
+        npm install -g markdownlint-cli markdown-spellcheck
+
+    - name: Run markdownlint
+      run: |
+        markdownlint '**/*.md'
+
+    - name: Run markdown-spellcheck
+      run: |
+        # Download dictionary to improve spell checking accuracy (optional)
+        spellcheck --init
+
+        # Check all markdown files for spelling issues
+        spellcheck '**/*.md'
