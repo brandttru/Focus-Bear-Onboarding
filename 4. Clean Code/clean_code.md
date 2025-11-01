@@ -332,3 +332,38 @@ Unit tests are important as they can help discern any problematic code and encou
 
 ### What issues did you find while testing?
 I did not find any specific issues with the tests and code, but I did have trouble with the set up of pytest. Initially, I was unable to install pytest due to issues with where python was located. This was an issue as without fixing this, I could not test the code at all.
+
+# Code Formatting & Style Guides
+### Run the formatter and linter on your codebase and fix any issues.
+```
+function sayHello(name){console.log("Hello, "+name+"!");}
+const people=["Alice","Bob","Charlie"]
+for(let i=0;i<people.length;i++){sayHello(people[i])}
+if(people.length>2){console.log("That's a lot of people!")}
+```
+
+After formatting: 
+```
+function sayHello(name) {
+  console.log("Hello, " + name + "!");
+}
+
+const people = ["Alice", "Bob", "Charlie"];
+
+for (let i = 0; i < people.length; i++) {
+  sayHello(people[i]);
+}
+
+if (people.length > 2) {
+  console.log("That's a lot of people!");
+}
+```
+
+### Why is code formatting important?
+It helps improve readability of code. This can then make it easier for future developers to read your code and understand its intent.
+
+### What issues did the linter detect?
+The linter detected issues such indenting, inconsistent quotation marks and missing new lines.
+
+### Did formatting the code make it easier to read?
+Formatting did make the code easier to read. For the functions and if statements it makes it easier to see which lines of code belongs to which as well as making it easier to see where the statements end.
