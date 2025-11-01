@@ -325,3 +325,10 @@ The code now is able to check for if inputs are numbers, as well as if b=0, thus
 
 ### How does handling errors improve reliability?
 Handling errors makes code more reliable as it can provide predictable behaviour. In the example, a user would expect the system to not be able to divide by 0 and thus by having that error handling, a user's experience is not affected as it was the expected behaviour. It can also make debugging easier when we know where errors could occur and what errors specifically.
+
+# Writing Unit Tests for Clean Code
+### How do unit tests help keep code clean?
+Unit tests are important as they can help discern any problematic code and encourage refactoring of code. For example, testing a large function can reveal it has too many responsibilities and dependencies and as such it may be better to break it down by responsibility. It can also catch edge cases, thus encouraging a developer to write better code that can handle edge cases.
+
+### What issues did you find while testing?
+I did not find any specific issues with the tests and code, but I did have trouble with the set up of pytest. Initially, I was unable to install pytest due to issues with where python was located. This was an issue as without fixing this, I could not test the code at all.
