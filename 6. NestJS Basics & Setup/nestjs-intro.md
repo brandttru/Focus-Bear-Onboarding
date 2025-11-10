@@ -1,0 +1,30 @@
+# What is NestJS? (Framework Overview)
+## Tasks
+### Explore NestJS’s modular architecture (Modules, Controllers, Services)
+- Modules
+    - Contain functionality of different parts of the app
+- Controllers
+    - Handle incoming HTTP requests and outgoing responses
+- Services
+    - Handle business logic and data manipulation, used by controllers
+
+### Find out how decorators (@Controller(), @Injectable()) work in NestJS
+- `@Controller`
+    - Marks a class as a controller that will handle incoming and outgoing HTTP requests
+- `@Injectable`
+    - Marks a class as a provider that can be injected into another class that depends on it
+
+
+## Reflection
+### What are the key differences between NestJS and Express.js?
+NestJS is an open source framework that builds scalable Node.js server-side applications. It uses type script with three main components: controllers, modules, providers.
+Similarly, Express.js, is a framework that builds apps. Where it differs is that Express.js uses JavaScript in addition to Node.js and does not follow the MVC architecture. Additionally, it does not have dependency injection and does not have a defined structure. 
+
+### Why does NestJS use decorators extensively?
+Decorators define what the code should do. Instead of having to write procedural code or dependency injection, decorators can be used instead that functionality. NestJS uses a TypeScript Library to store and retrieve metadata about classes, methods, and properties at runtime. It also makes it easier to understand what class is a controller, what is injectable, etc.
+
+### How does NestJS handle dependency injection?
+NestJS uses a Inversion of Control (IoC) container which manages the representation and injection of dependencies. With the `@Injectable` decorator, classes marked become a provider that can be injected into other classes. These dependencies are specified in the constructor of a class, and the IoC container resolves them at runtime.
+
+### What benefits does modular architecture provide in a large-scale app?
+When building large-scale apps where there are lots of changing parts, modular architecture can ensure maintainability as dependencies can be injected. This results in scalable and reusable modules which can making testing easier and thus improve collaboration.
