@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trigger Task</title>
+</head>
+<body>
+  <input type="text" id="taskName" placeholder="Enter task name" />
+  <button id="sendBtn">Send Task</button>
+
+  <script>
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const name = document.getElementById('taskName').value;
+      if (!name) {
+        alert('Please enter a task name');
+        return;
+      }
+
+      fetch('http://localhost:3000/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(`Task added! Job ID: ${data.jobId}, DB ID: ${data.dbId}`);
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        alert('Failed to add task');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -13,6 +13,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data  # persistent storage
 
+  # Redis
+  redis:
+    image: redis:7
+    container_name: focus-bear-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
   # NestJS Application
   app:
     build: .
@@ -22,6 +30,8 @@ services:
       - "3000:3000"               # expose NestJS on localhost:3000
     depends_on:
       - db
+    volumes:
+      - ./public:/usr/src/app/public 
 
 volumes:
   postgres_data:
