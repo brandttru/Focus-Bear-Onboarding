@@ -1,13 +1,7 @@
 import { Controller, Get, Post, Body, Put, Delete, Param, HttpCode, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
-
-class UpdateUserDto {
-  name?: string;
-}
-
-class CreateUserDto {
-  name: string;
-}
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller()
 export class AppController {
