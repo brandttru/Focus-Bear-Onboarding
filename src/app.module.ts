@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, NestModule  } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BullModule } from '@nestjs/bullmq';
@@ -7,6 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './app.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { LoggingInterceptor } from './logging.interceptor';
+import { LoggingMiddleware } from './logging.middleware';
 
 @Module({
   imports: [
@@ -34,9 +37,12 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/app',
     }),
-    TypeOrmModule.forFeature([User]),
   ],
   controllers: [AppController],
-  providers: [AppService, AppProcessor],
+  providers: [AppService, AppProcessor, {provide: APP_INTERCEPTOR, useClass: LoggingInterceptor},],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggingMiddleware).forRoutes('*'); // all routes
+  }
+}
