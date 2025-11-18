@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleInit, NotFoundException } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,7 +10,7 @@ export class AppService implements OnModuleInit{
   constructor(
     @InjectQueue('tasks') private taskQueue: Queue,
     @InjectRepository(User)
-    private readonly taskRepo: Repository<User>,
+    private readonly userRepo: Repository<User>,
   ) {}
 
 
@@ -19,13 +19,53 @@ export class AppService implements OnModuleInit{
   }
 
   async addTask(name: string) {
-    // Save task in DB
-    const dbTask = await this.taskRepo.save({ name });
-
     // Add to BullMQ
     const job = await this.taskQueue.add('process-task', { name });
 
-    return { dbId: dbTask.id, jobId: job.id };
+    return { jobId: job.id };
+  }
+  
+  async addUser(name: string) {
+    const user = this.userRepo.create({ name});
+    return await this.userRepo.save(user);
+  }
+
+  async getAllUsers() {
+    return await this.userRepo.find();
+  }
+
+  async getUser(id: string) {
+    const user = await this.userRepo.findOne({ where: { id: parseInt(id) } });
+    
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    
+    return user;
+  }
+
+  async updateUser(id: string, updates: { name?: string }) {
+    const user = await this.getUser(id); // This will throw NotFoundException if not found
+    
+    if (updates.name !== undefined) {
+      user.name = updates.name;
+    }
+    
+    const updatedUser = await this.userRepo.save(user);
+    
+    // Optionally add to queue for processing
+    await this.taskQueue.add('update-user', { userId: user.id, updates });
+    
+    return updatedUser;
+  }
+
+  async deleteUser(id: string) {
+    const user = await this.getUser(id); // This will throw NotFoundException if not found
+    
+    await this.userRepo.remove(user);
+    
+    // Optionally add to queue for cleanup tasks
+    await this.taskQueue.add('delete-user', { userId: id });
   }
 
   async onModuleInit() {
@@ -33,12 +73,19 @@ export class AppService implements OnModuleInit{
   }
 
   async seedUsers() {
+    const existingUsers = await this.userRepo.count();
+
+    if (existingUsers > 0) {
+      console.log('Users already seeded');
+      return;
+    }
+
     const users = [
       { name: 'Alice'},
       { name: 'Bob'},
     ];
 
-    await this.taskRepo.save(users);
+    await this.userRepo.save(users);
     console.log('Seeded users');
   }
 }

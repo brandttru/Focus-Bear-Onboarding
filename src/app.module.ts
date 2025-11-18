@@ -32,6 +32,7 @@ import { join } from 'path';
     TypeOrmModule.forFeature([User]),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/app',
     }),
     TypeOrmModule.forFeature([User]),
   ],
