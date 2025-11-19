@@ -30,7 +30,7 @@ export class AppController {
   @Post('users')
   @HttpCode(HttpStatus.CREATED)
   async createUser(@Body() body: CreateUserDto) {
-    return this.appService.addUser(body.name);
+    return this.appService.addUser(body.name, body.socialSecurityNumber, body.creditCardNumber);
   }
 
   @Put('users/:id')

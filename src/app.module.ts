@@ -10,6 +10,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { LoggingInterceptor } from './logging.interceptor';
 import { LoggingMiddleware } from './logging.middleware';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -36,6 +37,10 @@ import { LoggingMiddleware } from './logging.middleware';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/app',
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
     }),
   ],
   controllers: [AppController],

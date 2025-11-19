@@ -25,8 +25,8 @@ export class AppService implements OnModuleInit{
     return { jobId: job.id };
   }
   
-  async addUser(name: string) {
-    const user = this.userRepo.create({ name});
+  async addUser(name: string, socialSecurityNumber: string, creditCardNumber: string) {
+    const user = this.userRepo.create({name, socialSecurityNumber, creditCardNumber});
     return await this.userRepo.save(user);
   }
 
@@ -44,7 +44,7 @@ export class AppService implements OnModuleInit{
     return user;
   }
 
-  async updateUser(id: string, updates: { name?: string }) {
+  async updateUser(id: string, updates: { name?: string, socialSecurityNumber?: string, creditCardNumber?: string }) {
     const user = await this.getUser(id); // This will throw NotFoundException if not found
     
     if (updates.name !== undefined) {

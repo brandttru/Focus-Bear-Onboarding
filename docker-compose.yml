@@ -30,6 +30,8 @@ services:
       - "3000:3000"               # expose NestJS on localhost:3000
     depends_on:
       - db
+    env_file:
+      - .env
     volumes:
       - .:/usr/src
       - ./public:/usr/src/app/public 
