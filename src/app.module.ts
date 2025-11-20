@@ -11,6 +11,7 @@ import { join } from 'path';
 import { LoggingInterceptor } from './logging.interceptor';
 import { LoggingMiddleware } from './logging.middleware';
 import { ConfigModule } from '@nestjs/config';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
@@ -41,6 +42,11 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+    }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
+      },
     }),
   ],
   controllers: [AppController],

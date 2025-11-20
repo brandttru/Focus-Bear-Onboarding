@@ -1,14 +1,16 @@
-import { Controller, Get, Post, Body, Put, Delete, Param, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PinoLogger } from 'nestjs-pino';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService, private readonly logger: PinoLogger) {}
 
   @Get()
   getHello(): string {
+    this.logger.info('getHello called');
     return this.appService.getHello();
   }
 
@@ -19,6 +21,7 @@ export class AppController {
 
   @Get('users')
   async getAllUsers() {
+    this.logger.info('getAllUsers called');
     return this.appService.getAllUsers();
   }
 
@@ -45,5 +48,10 @@ export class AppController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteUser(@Param('id') id: string) {
     await this.appService.deleteUser(id);
+  }
+
+  @Get('error')
+  throwError() {
+    throw new NotFoundException('Test error');
   }
 }

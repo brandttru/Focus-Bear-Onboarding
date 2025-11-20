@@ -1,8 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import rateLimit from '@fastify/rate-limit';
+import fastifyRateLimit from '@fastify/rate-limit';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { AllExceptionsFilter } from './exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,17 +20,14 @@ async function bootstrap() {
       },
     }),
   );
-
-  await app.register(rateLimit, {
+  
+  await app.register(fastifyRateLimit, {
     max: 100,               // limit each IP to 100 requests
-    timeWindow: '1 minute', // per minute
-    addHeaders: {
-      'x-ratelimit-limit': true,
-      'x-ratelimit-remaining': true,
-      'x-ratelimit-reset': true,
-    },
+    timeWindow: '1 minute' // per minute
   });
 
-  await app.listen(process.env.PORT ?? 3000);
+  app.useGlobalFilters(new AllExceptionsFilter());
+
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0'); // why does adding '0.0.0.0' make fastify work??
 }
 bootstrap();
