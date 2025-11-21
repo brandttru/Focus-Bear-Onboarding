@@ -4,6 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import fastifyRateLimit from '@fastify/rate-limit';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AllExceptionsFilter } from './exception.filter';
+import { envSchema } from './env.schema';
+import fastifyEnv from '@fastify/env';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -27,6 +29,12 @@ async function bootstrap() {
   });
 
   app.useGlobalFilters(new AllExceptionsFilter());
+
+  await app.register(fastifyEnv, {
+    schema: envSchema,
+    dotenv: true,            // loads .env file
+    data: process.env,       // assigns validated vars to process.env
+  });
 
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0'); // why does adding '0.0.0.0' make fastify work??
 }

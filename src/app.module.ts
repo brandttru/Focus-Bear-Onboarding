@@ -10,11 +10,15 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { LoggingInterceptor } from './logging.interceptor';
 import { LoggingMiddleware } from './logging.middleware';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
     BullModule.forRoot({
       connection: {
         host: 'redis',
@@ -24,29 +28,31 @@ import { LoggerModule } from 'nestjs-pino';
     BullModule.registerQueue({
       name: 'tasks',
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'db',       
-      port: 5432,
-      username: 'myuser',    
-      password: 'mypassword',    
-      database: 'mydatabase',    
-      autoLoadEntities: true,
-      synchronize: true,       // ONLY for first run
+    TypeOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.get('DB_HOST'),
+        port: config.get<number>('DB_PORT'),
+        username: config.get('DB_USER'),
+        password: config.get('DB_PASS'),
+        database: config.get('DB_NAME'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([User]),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/app',
     }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-    }),
-    LoggerModule.forRoot({
-      pinoHttp: {
-        level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
-      },
+    LoggerModule.forRootAsync({
+      useFactory: (config: ConfigService) => ({
+        pinoHttp: {
+          level: config.get('NODE_ENV') !== 'production' ? 'debug' : 'info',
+        },
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
