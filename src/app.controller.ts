@@ -3,7 +3,12 @@ import { AppService } from './app.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PinoLogger } from 'nestjs-pino';
+import { Roles, Role } from './auth/roles.decorator';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './auth/jwt.guard';
+import { RolesGuard } from './auth/roles.guard';
 
+//@UseGuards(JwtAuthGuard, RolesGuard)      unless i can get a front end working with auth, this is pointless, front end will take too long
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService, private readonly logger: PinoLogger) {}
@@ -12,6 +17,12 @@ export class AppController {
   getHello(): string {
     this.logger.info('getHello called');
     return this.appService.getHello();
+  }
+
+  @Get('admin')
+  //@Roles(Role.ADMIN)
+  getAdmin(): string {
+    return this.appService.getAdmin();
   }
 
   @Post('tasks')

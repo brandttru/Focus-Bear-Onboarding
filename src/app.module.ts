@@ -12,6 +12,9 @@ import { LoggingInterceptor } from './logging.interceptor';
 import { LoggingMiddleware } from './logging.middleware';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/roles.guard';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -54,9 +57,18 @@ import { LoggerModule } from 'nestjs-pino';
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AppProcessor, {provide: APP_INTERCEPTOR, useClass: LoggingInterceptor},],
+  providers: [AppService, AppProcessor, 
+    {
+      provide: APP_INTERCEPTOR, useClass: LoggingInterceptor
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

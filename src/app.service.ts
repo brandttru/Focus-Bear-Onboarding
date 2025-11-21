@@ -13,9 +13,12 @@ export class AppService implements OnModuleInit{
     private readonly userRepo: Repository<User>,
   ) {}
 
-
   getHello(): string {
     return 'Hello World!';
+  }
+
+  getAdmin(): string {
+    return 'Hello Admin!';
   }
 
   async addTask(name: string) {
