@@ -13,3 +13,18 @@ Automated testing is important because it streamlines the testing process. Rathe
 
 ### What did you find challenging when writing your first Jest test?
 As the work up until this point required a lot of dependencies and libraries to be installed, I had to mock all of those, ensuring that necessary values were mocked.
+
+# Mocking API Calls in Jest
+## Tasks
+### Research how to mock API calls in Jest using jest.fn() and jest.mock().
+`jest.fn()` to mock a function especially if dependencies are injected
+`jest.mock()` to mock an entire module
+
+### Write a Jest test that mocks the API call and verifies the component’s behavior.
+![alt text](../Images/api_test.png)
+
+### Why is it important to mock API calls in tests?
+Since real API calls require network connection, mocking it will eliminate any network issues during testing, speeding up the testing process. It also makes it more reliable and isolates logical issues. Thus it will be easier to deduce if there are any issues with logic or API.
+
+### What are some common pitfalls when testing asynchronous code?
+Asynchronous code is hard to test because you must use `await` or `async` to ensure code doesn't run prematurely, thus returning an incorrect conclusion for the test. Race conditions may also be present if two functions are accessing the same data. Overall, asynchronous code has hard to predict behaviour due to code running at the same time and we must include keywords to tell it not to run prematurely.

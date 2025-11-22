@@ -4,6 +4,8 @@ import { Queue } from 'bullmq';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './app.entity';
+import { HttpService } from '@nestjs/axios';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class AppService implements OnModuleInit{
@@ -11,6 +13,7 @@ export class AppService implements OnModuleInit{
     @InjectQueue('tasks') private taskQueue: Queue,
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
+    private readonly http: HttpService,
   ) {}
 
   getHello(): string {
@@ -90,5 +93,13 @@ export class AppService implements OnModuleInit{
 
     await this.userRepo.save(users);
     console.log('Seeded users');
+  }
+
+  async getTodo(id: number) {
+    const response = await lastValueFrom(
+      this.http.get(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    );
+
+    return response.data;
   }
 }

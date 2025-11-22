@@ -65,4 +65,9 @@ export class AppController {
   throwError() {
     throw new NotFoundException('Test error');
   }
+
+  @Get('todo/:id')
+  async getTodo(@Param('id') id: string) {
+    return this.appService.getTodo(parseInt(id));
+  }
 }
