@@ -62,9 +62,13 @@ Requirements
 Overall I think this is a good example of AI generated code, its simple and easy enough for someone who has no coding knowledge to generate something they can use.
 
 ### Use AI for debugging a simple problem.
-To address the issue of the BFS (Breadth-First Search) stopping too early, you may need to ensure that all nodes are being visited correctly and that the queue is being managed properly. However, since the provided code does not include a BFS implementation, please provide the relevant BFS code section for further assistance.
+I used Claude to fix this simple python function and also included a small command at the bottom to ensure it will fix it and not do anything else. Without the return the statements the function itself would return None (e.g. `return def add_numbers(1,2)`), as such they needed to be included. 
+
+![alt text](../Images/ai_use_proof.png)
+
 
 ### Ask AI for explanations on a new concept you're learning.
+I AI to explain sports betting:
 Sports betting is wagering money on the outcome or events within athletic competitions; bettors place stakes on options such as picking a winner (moneyline), covering a point spread, totals (over/under), or specific events (prop bets). Bookmakers set odds that reflect the implied probability and determine potential payouts, and those odds can change with market action. While some bettors use analysis and strategy, sports betting carries financial risk and is subject to legal and regulatory rules, so responsible bankroll management and awareness of local laws are important.
 
 ## Reflection

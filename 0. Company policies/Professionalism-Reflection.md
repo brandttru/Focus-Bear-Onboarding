@@ -12,7 +12,7 @@ Respectful communication includes being attentive during meetings (camera on, mi
 
 ### How can you give and receive feedback professionally? (e.g., focus on actions, not people; assume good intent; ask for clarification instead of reacting defensively)
 Feedback is best acted on when the issue is clearly identified and suggestions are stated.
-It is best received in the mindset of wanting to improve. Be open to improvement.
+It is best received in the mindset of wanting to improve. Be open to improvement. For example, in a previous group project, I received feedback that my implementation did not meet requirements. Instead of taking it personally, I asked for clarification and some guidance as to what exactly was required. At Focus Bear, I’ll encourage feedback on pull requests and thank teammates for constructive suggestions.
 
 In a previous group project, I received feedback that my implementation did not meet requirements. Instead of taking it personally, I asked for calrification and some guidance as to what exactly was required. At Focus Bear, I’ll encourage feedback on pull requests and thank teammates for constructive suggestions.
 

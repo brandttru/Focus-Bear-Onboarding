@@ -8,11 +8,13 @@ import { PinoLogger } from 'nestjs-pino';
 import { HttpService } from '@nestjs/axios';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../src/app.entity';
+import { generateTestJwt } from './util/test-jwt';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
   let httpServiceMock: { get: jest.Mock };
   let appService: AppService;
+  let adminToken: string;
 
   beforeEach(async () => {
     httpServiceMock = {
@@ -63,6 +65,12 @@ describe('AppController (e2e)', () => {
     appService = moduleFixture.get<AppService>(AppService);
     app = moduleFixture.createNestApplication();
     await app.init();
+
+    adminToken = generateTestJwt({
+      sub: 1,          
+      username: 'admin',
+      roles: ['admin'] 
+    });
   });
 
   it('GET/ should return Hello World!', () => {
@@ -82,6 +90,7 @@ describe('AppController (e2e)', () => {
 
   const response = await request(app.getHttpServer())
     .post('/users')
+    .set('Authorization', `Bearer ${adminToken}`)
     .send({
       name: 'John Doe',
       socialSecurityNumber: '123456-1234567',
@@ -100,5 +109,6 @@ describe('AppController (e2e)', () => {
     '123456-1234567',
     '1234567890123456',
   );
-});
+  }
+);
 });

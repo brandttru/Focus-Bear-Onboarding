@@ -11,3 +11,5 @@ I did not use a Git client. This is because I find that using the website and VS
 
 ### What was the most interesting thing you learned about Git today?
 Git is really useful for working across multiple devices and storing work over the cloud. Best part is its free to use.
+
+A useful command I learnt is `git stash`. This saves changes but doesn't commit them and is particularly useful when I need to switch branches or pull changes. I can see myself using this at Focus Bear where code is collaborative.

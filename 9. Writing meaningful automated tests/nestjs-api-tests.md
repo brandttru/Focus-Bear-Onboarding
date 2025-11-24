@@ -4,6 +4,56 @@
 Used in E2E testing. Makes HTTP assertions to simulate HTTP requests. Recommended for NestJS since its a built in Node library. It is automatically included in NestJS CLI
 
 ### Write an integration test for a simple GET API endpoint and Write an integration test for a POST API endpoint with request validation
+The GET and POST tests are found in test/app/e2e-spec.ts
+```
+  it('GET/ should return Hello World!', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(200)
+      .expect('Hello World!');
+  });
+
+  it('POST/ should create user with valid input', async () => {
+  jest.spyOn(appService, 'addUser').mockResolvedValue({
+    id: 1,
+    name: 'John Doe',
+    socialSecurityNumber: '123456-1234567',
+    creditCardNumber: '1234567890123456',
+  });
+
+  const response = await request(app.getHttpServer())
+    .post('/users')
+    .set('Authorization', `Bearer ${adminToken}`)
+    .send({
+      name: 'John Doe',
+      socialSecurityNumber: '123456-1234567',
+      creditCardNumber: '1234567890123456',
+    })
+    .expect(HttpStatus.CREATED);
+
+  expect(response.body).toEqual({
+    id: 1,
+    name: 'John Doe',
+    socialSecurityNumber: '123456-1234567',
+    creditCardNumber: '1234567890123456',
+  });
+  expect(appService.addUser).toHaveBeenCalledWith(
+    'John Doe',
+    '123456-1234567',
+    '1234567890123456',
+  );
+  }
+```
+
+Test JWT generator function in test-jwt.ts and must be generated after compling test module
+```
+  adminToken = generateTestJwt({
+      sub: 1,          
+      username: 'admin',
+      roles: ['admin'] 
+    });
+```
+
 ![alt text](../Images/supertest.png)
 
 ## Reflection

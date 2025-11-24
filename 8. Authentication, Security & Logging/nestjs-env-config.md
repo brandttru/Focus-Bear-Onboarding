@@ -6,8 +6,28 @@ Official NestJS way to load and manage environment variables
 ### Set up an .env file to manage environment variables securely
 ![alt text](../Images/env_setup.png)
 
+The .env looks like:
+
+![alt text](../Images/env.png)
+
 ### Explore how to validate environment variables in NestJS
-Using fastify/env-schema, create a schema file that defines restrictions, load it into main
+Using fastify/env-schema, create a schema file that defines restrictions, load it into main.
+
+I created env.schema.ts which contains a validator for encryption key, then I used config.get() in app.module.ts, to extract values from .env.
+
+```
+export const envSchema = {
+  type: 'object',
+  required: ['ENCRYPTION_KEY'],
+  properties: {
+    ENCRYPTION_KEY: {
+      type: 'string',
+      minLength: 32,
+      maxLength: 32
+    },
+  },
+};
+```
 
 ## Reflection
 ### How does @nestjs/config help manage environment variables?

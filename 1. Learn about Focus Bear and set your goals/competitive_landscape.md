@@ -4,7 +4,7 @@ Focus Bear is a productivity app catered towards those with ADHD or autism. Tiim
 
 Focus bear aims to be more flexibile in its features. Other apps seem to focus on a few key features. For example, Cold Turkey is focused on website blocking, Tiimo focuses on being a schedule planner.
 
-Another advantage Focus Bear has it its pricing model. Focus Bear uses a subscription model for more advanced features but can still be used without payment. Cold Turkey, however, requires a one time payment that has made people demand a free alternative.
+Another advantage Focus Bear has it its pricing model. Focus Bear uses a subscription model for more advanced features but can still be used without payment. I tried out Cold Turkey and set up website blocking. Although it was effective at its purpose, I noticed it requires a one-time purchase for full access. Depending on how much use a user can get out of paying for it, then Cold Turkey would be the better app. But I feel Focus Bear has more useful features even at the free level.
 
 Focus Bear prioritises neurodivergent users, offering a nuanced details that make it more comfortable for a neurodivergent user to use. This includes providing users with different online asssessments such as autism and ADHD tests.
 ### If you were a user, why would you choose Focus Bear over competitors?

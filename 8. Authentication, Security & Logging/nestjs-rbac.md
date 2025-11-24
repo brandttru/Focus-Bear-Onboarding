@@ -23,7 +23,40 @@ To include roles themselves (not just permissions), you need to customize the to
 Then, create a Rule or an Action to add roles as custom claims to the access token, because roles are not included by default. After decode and read roles from the access token in your backend.
 
 ### Implement a NestJS guard to enforce role-based authorization
+src/auth/roles.decorator.ts shows the roles I have defined for my app.
+```
+export enum Role {
+  ADMIN = 'admin',
+  USER = 'user',
+}
+
+export const ROLES_KEY = 'roles';
+export const Roles = (...roles: Role[]) => SetMetadata(ROLES_KEY, roles);
+```
+
+Then in src/auth/roles.decorator.ts I created the role guard to ensure that certain functions can only be done by the admin role
+```
+@Injectable()
+export class RolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (!requiredRoles) {
+      return true;
+    }
+    const { user } = context.switchToHttp().getRequest();
+    return requiredRoles.some((role) => user.roles?.includes(role));
+  }
+}
+```
+
 ![alt text](../Images/auth.png)
+
+To ensure it worked, I had to invoke web requests to /admin, where if I was admin, the guard would let me through.
 
 ## Reflection
 ### How does Auth0 store and manage user roles?
