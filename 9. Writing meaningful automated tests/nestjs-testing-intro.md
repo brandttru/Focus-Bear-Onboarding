@@ -23,6 +23,13 @@ Testing framework included in NestJS
 Creates test modules that isolate parts from the real module and allow you to test just these.
 
 ### Run a sample test using Jest
+In app.controller.spec.ts I created a test module using nestjs/testing and used Jest to create test:
+```
+it('should return "Hello World!"', () => {
+    expect(appController.getHello()).toBe('Hello World!');
+  });
+```
+
 ![alt text](../Images/jest_test.png)
 
 ## Reflection
@@ -38,4 +45,4 @@ It ensures backend logic is correct. Backend is also connected to the database i
 It simplifies testing by creating test modules instead of using real modules. This allows for testing to involve less components before involving more. It also follows NestJS's dependency injection system, so services and controllers in the test environment also receive dependencies like in production. It also works with Jest, providing the same benefits from it.
 
 ### What are the challenges of writing tests for a NestJS application?
-NestJS often has complex external dependency injections and as such they must mocked when performing unit testing. Tests also must be maintainable as they will scale with the code. Ensuring that it is easy to add new test cases and update old news will be the difference in ensuring continuous progression.
+NestJS often has complex external dependency injections and as such they must mocked when performing unit testing. This was something I faced when creating my test module and had to use jest.fn() to mock values for any function calls I made with dependencies. Tests also must be maintainable as they will scale with the code. Ensuring that it is easy to add new test cases and update old ones will be the difference in ensuring continuous progression.

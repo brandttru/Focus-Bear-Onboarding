@@ -4,7 +4,18 @@
 Jest is a JavaScript testing framework. It can automatically find and run tests, provide functions to check results, mock functions and is included automatically in NestJS. Unit testing is important as it will define what is the expected outcome of the logic being tested. It will catch bugs early, make it easier to make appropriate changes, improve code quality and improve reliability of logic.
 
 ### Write a simple test for a utility function (e.g., a function that adds two numbers).
-In src/util/math.util.spec.ts
+The test was created in src/util/math.util.spec.ts:
+```
+describe('add()', () => {
+  it('should return the sum of two numbers', () => {
+    expect(add(2, 3)).toBe(5);
+  });
+
+  it('should handle negative numbers', () => {
+    expect(add(-4, 10)).toBe(6);
+  });
+});
+```
 
 ![alt text](../Images/jest_test.png)
 
@@ -21,6 +32,24 @@ As the work up until this point required a lot of dependencies and libraries to 
 `jest.mock()` to mock an entire module
 
 ### Write a Jest test that mocks the API call and verifies the component’s behavior.
+In app.controller.spec.ts:
+```
+it('should mock an external API call', async () => {
+    const mockResponse = {
+      data: { id: 1, title: 'Test Todo' },
+    }; // pretend this is the API response
+
+    httpServiceMock.get.mockReturnValue(of(mockResponse));
+
+    const result = await appService.getTodo(1);
+
+    expect(result).toEqual({ id: 1, title: 'Test Todo' });
+    expect(httpServiceMock.get).toHaveBeenCalledWith(
+      'https://jsonplaceholder.typicode.com/todos/1'
+    );
+  });
+```
+
 ![alt text](../Images/api_test.png)
 
 ### Why is it important to mock API calls in tests?
