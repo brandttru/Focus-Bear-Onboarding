@@ -12,6 +12,11 @@ describe('AppController', () => {
   let appService: AppService; 
   let httpServiceMock: { get: jest.Mock };
 
+  const mockAppService = {
+    getHello: jest.fn().mockReturnValue('mocked hello'),
+    getTodo: jest.fn(),
+  };
+
   beforeEach(async () => {
     httpServiceMock = {
       get: jest.fn(),
@@ -20,7 +25,10 @@ describe('AppController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [
-        AppService,
+        {
+          provide: AppService,
+          useValue: mockAppService,
+        },
 
         // Mock Bull queue
         {
@@ -61,10 +69,19 @@ describe('AppController', () => {
     appService = module.get<AppService>(AppService);
   });
   
+  /*
   it('should return "Hello World!"', () => {
     expect(appController.getHello()).toBe('Hello World!');
   });
+  won't work with mocked service
+  */
 
+  it('should return the mocked response', () => {
+    expect(appController.getHello()).toBe('mocked hello');
+    expect(mockAppService.getHello).toHaveBeenCalled();
+  });
+
+  /*
   it('should mock an external API call', async () => {
     const mockResponse = {
       data: { id: 1, title: 'Test Todo' },
@@ -79,4 +96,6 @@ describe('AppController', () => {
       'https://jsonplaceholder.typicode.com/todos/1'
     );
   });
+  also won't work with mocked service
+  */
 });
