@@ -82,9 +82,39 @@ I created the tests in test/counterSlice.test.ts for each reducer incremenet, de
 
 ![alt text](../Images/redux_test.png)
 
+### Write a test for an asynchronous Redux action (if applicable).
+In test/userSlice.test.ts I created tests for fetching user data and fetch errors. The fetch looks like:
+```
+  it('successfully fetches user data and updates state', async () => {
+    global.fetch = jest.fn(() => // mock fetch response (API)
+      Promise.resolve({ // async object we expect
+        json: () => Promise.resolve({ id: 1, name: 'John Doe' }),
+      })
+    );
+
+    const store = configureStore({ // create a redux store with user reducer
+      reducer: {
+        user: userReducer,
+      },
+    });
+
+    await store.dispatch(fetchUser(1));
+
+    const state = store.getState().user; // get state of slice after async action completes
+
+    expect(state.loading).toBe(false); // checks not loading anything, fetch is finished
+    expect(state.data).toEqual({ id: 1, name: 'John Doe' });
+    expect(state.error).toBeNull();
+  });
+```
+
+![alt text](../Images/async_thunk_test.png)
+
 ## Reflection
 ### What was the most challenging part of testing Redux?
 I found understanding Redux the most challenging. I already have an understanding of how states and actions work, but how they work in redux and how to test them were new to me. Eventually, by creating tests myself and running them did I develop and understanding of how Redux works.
+
+Testing reducers were simple enough, but testing async actions were a lot harder. This is because I needed to mock API calls, which I did with `jest.fn()`. Additionally, I had to configure a redux store to test the state transitions.
 
 ### How do Redux tests differ from React component tests?
 Redux tests are different because they focus on the actions undertaken in an app, i.e the transition from state to state. It also uses plain functions to test, rather than components in React tests.
