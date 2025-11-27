@@ -12,15 +12,20 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter()
   );
-    app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,            // removes unwanted fields
-      forbidNonWhitelisted: true, // throws error if extra fields sent
-      transform: true,            // auto-convert types (string → number)
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
-    }),
+  app.enableCors({
+    origin: 'http://localhost:5173', // Vite default port
+    credentials: true,
+  });
+  
+  app.useGlobalPipes(
+  new ValidationPipe({
+    whitelist: true,            // removes unwanted fields
+    forbidNonWhitelisted: true, // throws error if extra fields sent
+    transform: true,            // auto-convert types (string → number)
+    transformOptions: {
+      enableImplicitConversion: true,
+    },
+  }),
   );
   
   await app.register(fastifyRateLimit, {

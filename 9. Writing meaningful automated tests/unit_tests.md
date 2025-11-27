@@ -118,3 +118,65 @@ Testing reducers were simple enough, but testing async actions were a lot harder
 
 ### How do Redux tests differ from React component tests?
 Redux tests are different because they focus on the actions undertaken in an app, i.e the transition from state to state. It also uses plain functions to test, rather than components in React tests.
+
+# Testing React Components with Jest & React Testing Library
+## Tasks
+### Research how React Testing Library works with Jest.
+React Testing Library is a testing utility for React components. It focuses on testing components from the user's perspective, moreso tests behaviour and feedback instead of internal logic. It works by rendering React components into a testing environment (`render()`), query elements and simulate user interactions. Jest is the test runner and assertion library. In summary, React Testing Library provides the React utilities and Jest provides the testing framework.
+
+### Create a simple React component that displays a message.
+In frontend/src/components/message.tsx the component displays a message from someone as well as the time it was "sent". It is used in backend/src/App.tsx to create messages to display on the app homescreen.
+```
+<Message 
+  text="Hello! Welcome to the app." 
+  sender="Alice"
+/>
+```
+
+### Write a test that checks if the component renders correctly.
+A variety of tests were created in frontend/src/components/message.test.tsx that checks to see if each part of the component was rendered. For example, checking to see if the sender name was rendered looks like:
+```
+  it('renders the message text', () => {
+    render(<Message text="Hello World" sender="John" />); // render test Message
+    
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
+  });
+```
+Overall tests were successful and there was no issue.
+
+![alt text](../Images/react_test.png)
+
+### Write a test that simulates user interaction (e.g., clicking a button).
+For this I created a counter component that simply increases for each mouse click by the user, then made the test file.
+```
+test("increments count when button is clicked", () => {
+  render(<Counter />);
+
+  // get the elements
+  const countElement = screen.getByTestId("count");
+  const button = screen.getByRole("button", { name: /increase/i });
+
+  // initial state check
+  expect(countElement.textContent).toBe("Count: 0");
+
+  // simulate click
+  fireEvent.click(button);
+
+  // after click
+  expect(countElement.textContent).toBe("Count: 1");
+});
+```
+
+![alt text](../Images/react_interact_test.png)
+
+## Reflection
+### What are the benefits of using React Testing Library instead of testing implementation details?
+React Testing Library is beneficial as it:
+- Is less likely to break as it purely focuses on the aspects that affect how a user interacts with the app
+- Encourages more user focused testing/design
+- Easier to refactor
+- Prevents over-mocking
+- Faster understanding and maintenance
+
+### What challenges did you encounter when simulating user interaction?
+In general, I had issues with this as the entire time I had been working with NestJS and I didn't realise that I had to literally separate my repo into frontend and backend. Until I figured that out, I was stuck trying to understand why my React components could not be ran in the NestJS project. But once I did figure it out I had little issues as I have prior experience with React and was able to create the tests. The tests weren't too difficult as the component I created was simple and only had 1 response for a button click.
