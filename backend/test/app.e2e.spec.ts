@@ -2,12 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, HttpStatus } from '@nestjs/common';
 import request from 'supertest';
 import { App } from 'supertest/types';
-import { AppController } from '../backend/src/app.controller';
-import { AppService } from '../backend/src/app.service';
+import { AppController } from '../src/app.controller';
+import { AppService } from '../src/app.service';
 import { PinoLogger } from 'nestjs-pino';
 import { HttpService } from '@nestjs/axios';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../backend/src/app.entity';
+import { User } from '../src/app.entity';
 import { generateTestJwt } from './util/test-jwt';
 
 describe('AppController (e2e)', () => {

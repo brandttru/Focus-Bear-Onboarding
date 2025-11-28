@@ -132,7 +132,6 @@ In frontend/src/components/message.tsx the component displays a message from som
   sender="Alice"
 />
 ```
-
 ### Write a test that checks if the component renders correctly.
 A variety of tests were created in frontend/src/components/message.test.tsx that checks to see if each part of the component was rendered. For example, checking to see if the sender name was rendered looks like:
 ```

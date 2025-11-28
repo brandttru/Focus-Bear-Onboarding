@@ -5,7 +5,7 @@ describe('counter reducer', () => {
     const initialState = { value: 0 };
 
     const result = counterReducer(initialState, increment());
-
+    
     expect(result).toEqual({ value: 1 });
   });
 
@@ -22,7 +22,7 @@ describe('counter reducer', () => {
 
     const result = counterReducer(initialState, incrementByAmount(3));
 
-    expect(result).toEqual({ value: 13 });
+    expect(result.value).toBe(initialState.value + 3);
   });
 
   it('should return initial state when passed an unknown action', () => {

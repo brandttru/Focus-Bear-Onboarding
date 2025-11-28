@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppService } from './app.service';
-import { AppController } from './app.controller';
+import { AppService } from '../src/app.service';
+import { AppController } from '../src/app.controller';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from './app.entity';
+import { User } from '../src/app.entity';
 import { PinoLogger } from 'nestjs-pino';
 import { HttpService } from '@nestjs/axios';
 import { of } from 'rxjs';
