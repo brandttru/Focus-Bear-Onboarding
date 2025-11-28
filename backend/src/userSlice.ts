@@ -1,5 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface UserState {
+  data: User | null;
+  loading: boolean;
+  error: string | null;
+}
+
 // 1. Define async thunk
 export const fetchUser = createAsyncThunk('user/fetchUser', async (userId) => {
   const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
@@ -13,7 +25,7 @@ const userSlice = createSlice({
     data: null,
     loading: false,
     error: null,
-  },
+  } as UserState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -27,7 +39,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
       });
   },
 });

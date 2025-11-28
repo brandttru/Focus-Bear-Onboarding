@@ -11,6 +11,7 @@ import { tap } from 'rxjs/operators';
 export class LoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req = context.switchToHttp().getRequest();
+    const res = context.switchToHttp().getResponse();
     const method = req.method;
     const url = req.url;
 
@@ -21,8 +22,9 @@ export class LoggingInterceptor implements NestInterceptor {
     return next.handle().pipe(
       tap((responseData) => {
         const responseTime = Date.now() - now;
+        const statusCode = res.statusCode;
         console.log(
-          `Response for ${method} ${url} - ${responseTime}ms:`,
+          `Response for ${method} ${url} - Status: ${statusCode} - ${responseTime}ms:`,
           responseData,
         );
       }),

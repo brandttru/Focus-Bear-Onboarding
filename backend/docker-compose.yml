@@ -32,10 +32,10 @@ services:
       - db
     env_file:
       - .env
-    volumes:
-      - .:/usr/src
-      - ./public:/usr/src/app/public 
-    command: npm run start:dev
+    #volumes:
+    #  - .:/usr/src
+    #  - ./public:/usr/src/app/public 
+    #command: npm run start:dev
 
 volumes:
   postgres_data:
