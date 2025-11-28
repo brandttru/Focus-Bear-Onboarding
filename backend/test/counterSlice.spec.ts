@@ -1,11 +1,15 @@
-import counterReducer, { increment, decrement, incrementByAmount } from '../src/counterSlice';
+import counterReducer, {
+  increment,
+  decrement,
+  incrementByAmount,
+} from '../src/counterSlice';
 
 describe('counter reducer', () => {
   it('should handle increment', () => {
     const initialState = { value: 0 };
 
     const result = counterReducer(initialState, increment());
-    
+
     expect(result).toEqual({ value: 1 });
   });
 

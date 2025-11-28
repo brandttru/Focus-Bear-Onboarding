@@ -26,3 +26,5 @@ In an agile team, the developer is responsible for the development of the produc
 
 ### Identify one other role you frequently collaborate with and describe how you can improve teamwork with them.
 One role I expect to work closely with is QA as they will be checking the quality of my code. Some ways of improving teamwork with them could be to be in contact with them regarding what how the want the code to be written. Additionally, we can share any issues (assumptions, edge cases) we see early on in a sprint. Another way is using CI/CD pipelines to streamline the QA testing process, making work easier for both teams.
+
+I previously worked in a scrum agile team for a uni project. Although it was a long time ago I still remember when our PM was absent for weeks and did not communicate with us. As we lost a crucial role, the team had a discussion about how to proceeed and we decided that someone should take on the role of PM as a secondary role until we regained contact with our original PM.

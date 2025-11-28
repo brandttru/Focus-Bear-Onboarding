@@ -14,7 +14,9 @@ interface UserState {
 
 // 1. Define async thunk
 export const fetchUser = createAsyncThunk('user/fetchUser', async (userId) => {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${userId}`,
+  );
   return response.json();
 });
 

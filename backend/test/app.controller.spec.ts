@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 
 describe('AppController', () => {
   let appController: AppController;
-  let appService: AppService; 
+  let appService: AppService;
   let httpServiceMock: { get: jest.Mock };
 
   const mockAppService = {
@@ -68,7 +68,7 @@ describe('AppController', () => {
     appController = module.get<AppController>(AppController);
     appService = module.get<AppService>(AppService);
   });
-  
+
   /*
   it('should return "Hello World!"', () => {
     expect(appController.getHello()).toBe('Hello World!');

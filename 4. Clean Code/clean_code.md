@@ -334,7 +334,9 @@ Unit tests are important as they can help discern any problematic code and encou
 I did not find any specific issues with the tests and code, but I did have trouble with the set up of pytest. Initially, I was unable to install pytest due to issues with where python was located. This was an issue as without fixing this, I could not test the code at all.
 
 # Code Formatting & Style Guides
+## Tasks
 ### Run the formatter and linter on your codebase and fix any issues.
+Before formatting:
 ```
 function sayHello(name){console.log("Hello, "+name+"!");}
 const people=["Alice","Bob","Charlie"]
@@ -358,7 +360,14 @@ if (people.length > 2) {
   console.log("That's a lot of people!");
 }
 ```
+### Install and configure ESLint and Prettier in your development environment.
+ESLint and Prettier were installed and automatically setup.
 
+### Run the formatter and linter on your codebase and fix any issues.
+I ran formatter using `npm run format` and it automatically formmatted all of my files.
+![alt text](../Images/formatter.png)
+
+## Reflection
 ### Why is code formatting important?
 It helps improve readability of code. This can then make it easier for future developers to read your code and understand its intent.
 

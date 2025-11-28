@@ -14,7 +14,7 @@ A merge conflict will be present now
 6. Continue and merge the two branches
 
 ### What caused the conflict?
-The conflict was caused by the two branches having differing code in test_conflict.md, as such git did not know which one I wanted in the repo.
+The conflict was caused by the two branches having differing text in test_conflict.md, as such git did not know which one I wanted in the repo.
 
 ### How did you resolve it?
 Using VS Code in built in conflict resolution I accepted the changes in main, merged the branches locally and then synced them to the cloud.
@@ -22,4 +22,4 @@ Using VS Code in built in conflict resolution I accepted the changes in main, me
 ![alt text](../images/merge_conflict.png)
 
 ### What did you learn?
-It is important to know how to resolve conflicts as it is not uncommon to experience conflicts.
+It is important to know how to resolve conflicts as it is not uncommon to experience conflicts. The overall process of merge conflicts was not new to me and I was able to navigate through the through VS Code confliction resolution as I had prior experience with it. In the future I will continue to use my knowledge of merge conflicts to prevent them from happening and resolve them in case they do happen.

@@ -39,7 +39,9 @@ describe('LoggingInterceptor', () => {
 
   it('should log the incoming request', (done) => {
     interceptor.intercept(mockContext, mockCallHandler).subscribe(() => {
-      expect(console.log).toHaveBeenCalledWith('Incoming Request: GET /test-endpoint');
+      expect(console.log).toHaveBeenCalledWith(
+        'Incoming Request: GET /test-endpoint',
+      );
       done();
     });
   });

@@ -10,7 +10,7 @@ describe('Async thunk: fetchUser', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve({ id: 1, name: 'John Doe' }),
-      })
+      }),
     );
 
     const store = configureStore({

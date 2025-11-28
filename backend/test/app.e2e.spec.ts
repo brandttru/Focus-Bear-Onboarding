@@ -24,42 +24,42 @@ describe('AppController (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [
-          AppService,
-  
-          // Mock Bull queue
-          {
-            provide: 'BullQueue_tasks',
-            useValue: { add: jest.fn() },
+        AppService,
+
+        // Mock Bull queue
+        {
+          provide: 'BullQueue_tasks',
+          useValue: { add: jest.fn() },
+        },
+
+        // Mock TypeORM repository
+        {
+          provide: getRepositoryToken(User),
+          useValue: {
+            count: jest.fn().mockResolvedValue(0),
+            find: jest.fn(),
+            findOne: jest.fn(),
+            save: jest.fn(),
+            create: jest.fn(),
+            update: jest.fn(),
+            delete: jest.fn(),
           },
-  
-          // Mock TypeORM repository
-          {
-            provide: getRepositoryToken(User),
-            useValue: {
-              count: jest.fn().mockResolvedValue(0),
-              find: jest.fn(),
-              findOne: jest.fn(),
-              save: jest.fn(),
-              create: jest.fn(),
-              update: jest.fn(),
-              delete: jest.fn(),
-            },
+        },
+        // Mock PinoLogger
+        {
+          provide: PinoLogger,
+          useValue: {
+            info: jest.fn(),
+            error: jest.fn(),
+            warn: jest.fn(),
+            debug: jest.fn(),
           },
-          // Mock PinoLogger
-          {
-            provide: PinoLogger,
-            useValue: {
-              info: jest.fn(),
-              error: jest.fn(),
-              warn: jest.fn(),
-              debug: jest.fn(),
-            },
-          },
-          {
-            provide: HttpService,
-            useValue: httpServiceMock,
-          },
-        ],
+        },
+        {
+          provide: HttpService,
+          useValue: httpServiceMock,
+        },
+      ],
     }).compile();
 
     appService = moduleFixture.get<AppService>(AppService);
@@ -67,9 +67,9 @@ describe('AppController (e2e)', () => {
     await app.init();
 
     adminToken = generateTestJwt({
-      sub: 1,          
+      sub: 1,
       username: 'admin',
-      roles: ['admin'] 
+      roles: ['admin'],
     });
   });
 
@@ -81,34 +81,33 @@ describe('AppController (e2e)', () => {
   });
 
   it('POST/ should create user with valid input', async () => {
-  jest.spyOn(appService, 'addUser').mockResolvedValue({
-    id: 1,
-    name: 'John Doe',
-    socialSecurityNumber: '123456-1234567',
-    creditCardNumber: '1234567890123456',
-  });
-
-  const response = await request(app.getHttpServer())
-    .post('/users')
-    .set('Authorization', `Bearer ${adminToken}`)
-    .send({
+    jest.spyOn(appService, 'addUser').mockResolvedValue({
+      id: 1,
       name: 'John Doe',
       socialSecurityNumber: '123456-1234567',
       creditCardNumber: '1234567890123456',
-    })
-    .expect(HttpStatus.CREATED);
+    });
 
-  expect(response.body).toEqual({
-    id: 1,
-    name: 'John Doe',
-    socialSecurityNumber: '123456-1234567',
-    creditCardNumber: '1234567890123456',
+    const response = await request(app.getHttpServer())
+      .post('/users')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: 'John Doe',
+        socialSecurityNumber: '123456-1234567',
+        creditCardNumber: '1234567890123456',
+      })
+      .expect(HttpStatus.CREATED);
+
+    expect(response.body).toEqual({
+      id: 1,
+      name: 'John Doe',
+      socialSecurityNumber: '123456-1234567',
+      creditCardNumber: '1234567890123456',
+    });
+    expect(appService.addUser).toHaveBeenCalledWith(
+      'John Doe',
+      '123456-1234567',
+      '1234567890123456',
+    );
   });
-  expect(appService.addUser).toHaveBeenCalledWith(
-    'John Doe',
-    '123456-1234567',
-    '1234567890123456',
-  );
-  }
-);
 });

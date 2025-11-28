@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Put, Delete, Param, HttpCode, HttpStatus, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Delete,
+  Param,
+  HttpCode,
+  HttpStatus,
+  NotFoundException,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -11,7 +22,10 @@ import { RolesGuard } from './auth/roles.guard';
 //@UseGuards(JwtAuthGuard, RolesGuard)      unless i can get a front end working with auth, this is pointless, front end will take too long
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private readonly logger: PinoLogger) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly logger: PinoLogger,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -44,14 +58,15 @@ export class AppController {
   @Post('users')
   @HttpCode(HttpStatus.CREATED)
   async createUser(@Body() body: CreateUserDto) {
-    return await this.appService.addUser(body.name, body.socialSecurityNumber, body.creditCardNumber);
+    return await this.appService.addUser(
+      body.name,
+      body.socialSecurityNumber,
+      body.creditCardNumber,
+    );
   }
 
   @Put('users/:id')
-  async updateUser(
-    @Param('id') id: string, 
-    @Body() body: UpdateUserDto
-  ) {
+  async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.appService.updateUser(id, body);
   }
 

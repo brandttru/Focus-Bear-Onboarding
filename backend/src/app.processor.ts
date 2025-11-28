@@ -8,7 +8,7 @@ export class AppProcessor extends WorkerHost {
 
   async process(job: Job) {
     this.logger.log(`Processing: ${job.data.name}`);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     this.logger.log(`Completed: ${job.data.name}`);
     return { processed: true };
   }
