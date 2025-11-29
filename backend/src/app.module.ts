@@ -23,11 +23,15 @@ import { HttpModule } from '@nestjs/axios';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    BullModule.forRoot({
-      connection: {
-        host: 'redis',
-        port: 6379,
-      },
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => ({
+        connection: {
+          host: config.get<string>('REDIS_HOST'),
+          port: config.get<number>('REDIS_PORT'),
+        },
+      }),
+      inject: [ConfigService],
     }),
     BullModule.registerQueue({
       name: 'tasks',

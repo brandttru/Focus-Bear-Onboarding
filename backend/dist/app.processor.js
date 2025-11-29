@@ -14,7 +14,7 @@ let AppProcessor = AppProcessor_1 = class AppProcessor extends bullmq_1.WorkerHo
     logger = new common_1.Logger(AppProcessor_1.name);
     async process(job) {
         this.logger.log(`Processing: ${job.data.name}`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         this.logger.log(`Completed: ${job.data.name}`);
         return { processed: true };
     }

@@ -2,10 +2,12 @@ import { OnModuleInit } from '@nestjs/common';
 import { Queue } from 'bullmq';
 import { Repository } from 'typeorm';
 import { User } from './app.entity';
+import { HttpService } from '@nestjs/axios';
 export declare class AppService implements OnModuleInit {
     private taskQueue;
     private readonly userRepo;
-    constructor(taskQueue: Queue, userRepo: Repository<User>);
+    private readonly http;
+    constructor(taskQueue: Queue, userRepo: Repository<User>, http: HttpService);
     getHello(): string;
     getAdmin(): string;
     addTask(name: string): Promise<{
@@ -22,4 +24,5 @@ export declare class AppService implements OnModuleInit {
     deleteUser(id: string): Promise<void>;
     onModuleInit(): Promise<void>;
     seedUsers(): Promise<void>;
+    getTodo(id: number): Promise<any>;
 }

@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 let LoggingMiddleware = class LoggingMiddleware {
     use(req, res, next) {
         console.log(`[Middleware] ${req.method} ${req.originalUrl}`);
+        console.log(`[Middleware] Headers: ${JSON.stringify(req.headers)}`);
         next();
     }
 };

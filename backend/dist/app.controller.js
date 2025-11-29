@@ -18,10 +18,6 @@ const app_service_1 = require("./app.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const nestjs_pino_1 = require("nestjs-pino");
-const roles_decorator_1 = require("./auth/roles.decorator");
-const common_2 = require("@nestjs/common");
-const jwt_guard_1 = require("./auth/jwt.guard");
-const roles_guard_1 = require("./auth/roles.guard");
 let AppController = class AppController {
     appService;
     logger;
@@ -47,7 +43,7 @@ let AppController = class AppController {
         return this.appService.getUser(id);
     }
     async createUser(body) {
-        return this.appService.addUser(body.name, body.socialSecurityNumber, body.creditCardNumber);
+        return await this.appService.addUser(body.name, body.socialSecurityNumber, body.creditCardNumber);
     }
     async updateUser(id, body) {
         return this.appService.updateUser(id, body);
@@ -57,6 +53,9 @@ let AppController = class AppController {
     }
     throwError() {
         throw new common_1.NotFoundException('Test error');
+    }
+    async getTodo(id) {
+        return this.appService.getTodo(parseInt(id));
     }
 };
 exports.AppController = AppController;
@@ -68,7 +67,6 @@ __decorate([
 ], AppController.prototype, "getHello", null);
 __decorate([
     (0, common_1.Get)('admin'),
-    (0, roles_decorator_1.Roles)(roles_decorator_1.Role.ADMIN),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
@@ -123,9 +121,16 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "throwError", null);
+__decorate([
+    (0, common_1.Get)('todo/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getTodo", null);
 exports.AppController = AppController = __decorate([
-    (0, common_2.UseGuards)(jwt_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService, nestjs_pino_1.PinoLogger])
+    __metadata("design:paramtypes", [app_service_1.AppService,
+        nestjs_pino_1.PinoLogger])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

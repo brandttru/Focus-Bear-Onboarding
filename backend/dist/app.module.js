@@ -24,6 +24,7 @@ const nestjs_pino_1 = require("nestjs-pino");
 const core_2 = require("@nestjs/core");
 const roles_guard_1 = require("./auth/roles.guard");
 const auth_module_1 = require("./auth/auth.module");
+const axios_1 = require("@nestjs/axios");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logging_middleware_1.LoggingMiddleware).forRoutes('*');
@@ -37,11 +38,15 @@ exports.AppModule = AppModule = __decorate([
                 isGlobal: true,
                 envFilePath: '.env',
             }),
-            bullmq_1.BullModule.forRoot({
-                connection: {
-                    host: 'redis',
-                    port: 6379,
-                },
+            bullmq_1.BullModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: (config) => ({
+                    connection: {
+                        host: config.get('REDIS_HOST'),
+                        port: config.get('REDIS_PORT'),
+                    },
+                }),
+                inject: [config_1.ConfigService],
             }),
             bullmq_1.BullModule.registerQueue({
                 name: 'tasks',
@@ -73,11 +78,15 @@ exports.AppModule = AppModule = __decorate([
                 inject: [config_1.ConfigService],
             }),
             auth_module_1.AuthModule,
+            axios_1.HttpModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, app_processor_1.AppProcessor,
+        providers: [
+            app_service_1.AppService,
+            app_processor_1.AppProcessor,
             {
-                provide: core_1.APP_INTERCEPTOR, useClass: logging_interceptor_1.LoggingInterceptor
+                provide: core_1.APP_INTERCEPTOR,
+                useClass: logging_interceptor_1.LoggingInterceptor,
             },
             {
                 provide: core_2.APP_GUARD,

@@ -19,12 +19,16 @@ const bullmq_2 = require("bullmq");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const app_entity_1 = require("./app.entity");
+const axios_1 = require("@nestjs/axios");
+const rxjs_1 = require("rxjs");
 let AppService = class AppService {
     taskQueue;
     userRepo;
-    constructor(taskQueue, userRepo) {
+    http;
+    constructor(taskQueue, userRepo, http) {
         this.taskQueue = taskQueue;
         this.userRepo = userRepo;
+        this.http = http;
     }
     getHello() {
         return 'Hello World!';
@@ -37,7 +41,11 @@ let AppService = class AppService {
         return { jobId: job.id };
     }
     async addUser(name, socialSecurityNumber, creditCardNumber) {
-        const user = this.userRepo.create({ name, socialSecurityNumber, creditCardNumber });
+        const user = this.userRepo.create({
+            name,
+            socialSecurityNumber,
+            creditCardNumber,
+        });
         return await this.userRepo.save(user);
     }
     async getAllUsers() {
@@ -73,12 +81,13 @@ let AppService = class AppService {
             console.log('Users already seeded');
             return;
         }
-        const users = [
-            { name: 'Alice' },
-            { name: 'Bob' },
-        ];
+        const users = [{ name: 'Alice' }, { name: 'Bob' }];
         await this.userRepo.save(users);
         console.log('Seeded users');
+    }
+    async getTodo(id) {
+        const response = await (0, rxjs_1.lastValueFrom)(this.http.get(`https://jsonplaceholder.typicode.com/todos/${id}`));
+        return response.data;
     }
 };
 exports.AppService = AppService;
@@ -87,6 +96,7 @@ exports.AppService = AppService = __decorate([
     __param(0, (0, bullmq_1.InjectQueue)('tasks')),
     __param(1, (0, typeorm_1.InjectRepository)(app_entity_1.User)),
     __metadata("design:paramtypes", [bullmq_2.Queue,
-        typeorm_2.Repository])
+        typeorm_2.Repository,
+        axios_1.HttpService])
 ], AppService);
 //# sourceMappingURL=app.service.js.map

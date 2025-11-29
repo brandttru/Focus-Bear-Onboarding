@@ -19,4 +19,5 @@ export declare class AppController {
     updateUser(id: string, body: UpdateUserDto): Promise<import("./app.entity").User>;
     deleteUser(id: string): Promise<void>;
     throwError(): void;
+    getTodo(id: string): Promise<any>;
 }

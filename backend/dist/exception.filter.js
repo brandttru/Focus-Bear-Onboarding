@@ -13,7 +13,7 @@ let AllExceptionsFilter = class AllExceptionsFilter {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-        let status = exception instanceof common_1.HttpException
+        const status = exception instanceof common_1.HttpException
             ? exception.getStatus()
             : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
         let message = 'Internal server error';

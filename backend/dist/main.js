@@ -13,6 +13,10 @@ const env_schema_1 = require("./env.schema");
 const env_1 = __importDefault(require("@fastify/env"));
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, new platform_fastify_1.FastifyAdapter());
+    app.enableCors({
+        origin: 'http://localhost:5173',
+        credentials: true,
+    });
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
         forbidNonWhitelisted: true,
@@ -23,7 +27,7 @@ async function bootstrap() {
     }));
     await app.register(rate_limit_1.default, {
         max: 100,
-        timeWindow: '1 minute'
+        timeWindow: '1 minute',
     });
     app.useGlobalFilters(new exception_filter_1.AllExceptionsFilter());
     await app.register(env_1.default, {
