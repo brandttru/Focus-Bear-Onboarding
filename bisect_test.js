@@ -3,4 +3,4 @@ function add(a, b) {
 }
 
 console.log("Adding numbers...");
-console.log("Result:", add(2, 2));
+console.log("Result:", add(3, 3));
