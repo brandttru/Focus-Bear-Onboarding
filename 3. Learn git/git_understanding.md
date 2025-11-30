@@ -96,3 +96,25 @@ As we work with larger teams, codebases will grow exponentially. As such, having
 
 ### How can poor commit messages cause issues later?
 In situations where you have to look through hundreds of commits where each of them are written poorly it can be hard to find certain commits and keep track of the history of the code.
+
+# Branching & Team Collaboration
+## Tasks
+### Create a new branch in your Git desktop client (e.g., GitHub Desktop, VS Code, SourceTree).
+I created a branch named test, using VS Code which I am already familiar with.
+
+### Make a small change in your repo and commit it to the new branch.
+I created a file called test_conflict.md and changed the text in the new branch.
+
+### Switch back to main and check that your changes are not there.
+Changes would not be in main since they were committed in test.
+
+## Reflection
+### Why is pushing directly to main problematic?
+Pushing to main makes it harder to track changes, do code reviews and may break production code. Merge conflicts are also very likely, which are tedious to resolve, slowing down development.
+
+### How do branches help with reviewing code?
+It allows for developers to review code while other code can be merged into main, keeping production going.
+
+### What happens if two people edit the same file on different branches?
+Nothing happens as, they exist in two different areas of the repo but once they are merged into main you may see conflict. This depends on which lines were edited. If the same line was edited in both branches then a conflict will arise.
+
