@@ -1,3 +1,29 @@
+# Merge Conflicts & Conflict Resolution
+### Research what causes merge conflicts in Git.
+In a situation where you do some work in a branch and the branch is updated before you can merge then there will be a merge conflict if the same file has been updated.
+i.e. you are working in an outdated branch.
+
+### Create a merge conflict in your test repo
+This was done by
+1. Created a file in main called test_conflict.md with some text and commited it
+2. Created a branch called test
+3. Edited the file by changing some text and committed
+4. Merged test into main
+A merge conflict will be present now
+5. Resolve conflicts in VS Code by accepting either version of test_conflict.md
+6. Continue and merge the two branches
+
+### What caused the conflict?
+The conflict was caused by the two branches having differing text in test_conflict.md, as such git did not know which one I wanted in the repo.
+
+### How did you resolve it?
+Using VS Code in built in conflict resolution I accepted the changes in main, merged the branches locally and then synced them to the cloud.
+
+![alt text](../images/merge_conflict.png)
+
+### What did you learn?
+It is important to know how to resolve conflicts as it is not uncommon to experience conflicts. The overall process of merge conflicts was not new to me and I was able to navigate through the through VS Code confliction resolution as I had prior experience with it. In the future I will continue to use my knowledge of merge conflicts to prevent them from happening and resolve them in case they do happen.
+
 # Git Concepts: Staging vs. Committing
 ## Tasks
 ### Research the difference between staging and committing.
@@ -36,3 +62,37 @@ A well structured PR will have a clear and specific title, concise and informati
 
 ### What did you learn from reviewing an open-source PR?
 I learnt that PRs are sometimes rather small. I had the misconception that a PR be raised when a large feature or bug was fixed. But going through the public PRs of React shows that more often than not PRs are rather small, featuring a couple commits and less than 100 lines changed.
+
+# Writing Meaningful Commit Messages
+## Tasks
+### Research best practices for writing commit messages.
+- Have a subject (like an email)
+- Use present tense
+- Keep subject and body short
+- Don't use full stops
+- Metadata if needed
+- Keep commits focused on one change
+- Use the standard set by the team
+
+### Explore commit histories in an open-source GitHub project (e.g., React, Node.js) and analyze good vs. bad commit messages.
+Good - `[test] Fix Error Proxy in Node.js 21+`, includees metadata, is short and focused
+Bad - `devtools: fix ellipsis truncation for key values`, metadata goes against standard, all lower case
+
+### Make three commits in your repo with different commit message styles:
+- A vague commit message
+    - [Fixed mistakes and feedback](https://github.com/brandttru/Focus-Bear-Onboarding/commit/2587d201708ba47a973789e08f4827a9f598ae5a)
+- An overly detailed commit message.
+    - [Attempted typeorm-encrypted](https://github.com/brandttru/Focus-Bear-Onboarding/commit/ad39c597de4a12535f0b00d0763a8487052387e1)
+        - Body includes personal notes which are not needed for the overall history of the project
+- A well-structured commit message.
+    - [Updated time plan](https://github.com/brandttru/Focus-Bear-Onboarding/commit/7bfbdea01fbaa60fafc99084dd44ef42a7b0b97d)
+        - Not the best but its focused and short
+
+### What makes a good commit message?
+As previously mentioned in my research for best practices for writing commit messages.
+
+### How does a clear commit message help in team collaboration?
+As we work with larger teams, codebases will grow exponentially. As such, having clear commit messages makes it easier to look for commits, easier to understand and overall speeds up the code review process.
+
+### How can poor commit messages cause issues later?
+In situations where you have to look through hundreds of commits where each of them are written poorly it can be hard to find certain commits and keep track of the history of the code.
