@@ -118,3 +118,28 @@ It allows for developers to review code while other code can be merged into main
 ### What happens if two people edit the same file on different branches?
 Nothing happens as, they exist in two different areas of the repo but once they are merged into main you may see conflict. This depends on which lines were edited. If the same line was edited in both branches then a conflict will arise.
 
+# Advanced Git Commands & When to Use Them
+## Tasks
+### Research the following Git commands and test them in your repo:
+- `git checkout main -- <file>`
+    - This will restore a file from another branch (main in this case) into your working branch
+    - I tried it on test_conflict.md, which didn't do anything because the versions are already the same
+- `git cherry-pick <commit>`
+    - Takes a commit from another branch and applies it to the current branch
+    - USEFUL FOR MOVING COMMITS
+    - Since I don't have other branches, I tried it with something from main and got this:
+
+    ![alt text](../Images/git_cherry_pick.png)
+- `git log`
+    - Shows log of commits including authors, dates, messages
+    - I tried it and it showed some commits, I had to press enter to scroll through the list
+- `git blame <file>`
+    - Sees who last modified each line of a file
+    - Tried it on generate-keys.js and saw for each line, the commit, my name, date and the code written on each line
+
+## Reflection
+### When would you use it in a real project (hint: these are all really important in long running projects with multiple developers)?
+I think checkout would be really useful since I often find myself making too many changes that don't even work, so going back to the working version is useful. Cherry-pick, I can see being useful when accidentally working the wrong branch. I've found in the past I often get too focused on the idea of getting a task done but don't remember to branch out. Blame I think would be useful if I notice that a file I made changed. Maybe I want to ask the person who change it why they made certain changes.
+
+### What surprised you while testing these commands?
+I was most surprised that these commands existed. I have been using git for a long time and would love to have used these in the past. Cherry-pick especially would be useful for ensuring commits are tracked correctly and in the right branch.
