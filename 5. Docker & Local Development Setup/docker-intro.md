@@ -1,4 +1,18 @@
 # What is Docker and Why Use It?
+## Tasks
+### Research what Docker is and how it differs from virtual machines
+Docker is an application that "containerizes" a project for deployment. It bundles all packages and dependencies together so that it can run consistently on different systems. It is different in that it is lightweight and containers share host OS kernel instead of running guest OS on virtualized hardware.
+
+### Understand the benefits of using Docker in a backend development environment
+THe biggest benefit is having a consistent development environment. Since everyone's system is different, it removes the issue of some aspects working on one machine but not another.
+
+### Explore how containers help maintain consistency across different environments
+Since all the packages, dependencies, libraries etc are bundled together, it guarantees the app will run the same.
+
+### Review how Focus Bear uses Docker in backend services
+Since I do not have access to the Focus Bear repo I cannot see how Docker is being used specifically. Based on my experience with Docker and what I've learnt so far I can imagine docker-compose.yml will not be using hardcoded values and those are instead in a local .env.
+
+## Reflection
 ### How does Docker differ from a virtual machine?
 Docker is a platform that allows developers to build, package and run applications in containers. Containers include everything needed to run a program, such as code, runtime, libraries and dependencies. This ensures that the application runs the same across different environments.
 

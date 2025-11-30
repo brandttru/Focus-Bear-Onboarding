@@ -2,6 +2,11 @@
 ## Tasks
 ### Research how to inspect running containers 
 `docker ps` - displays currently active running containers on the system and info
+
+If I run this in terminal I get:
+    
+![alt text](../Images/docker_ps.png)
+
 `docker inspect` - provides low level information about a certain container
 
 ### Explore how to enter a running container 

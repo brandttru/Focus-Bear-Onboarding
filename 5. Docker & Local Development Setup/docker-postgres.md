@@ -1,5 +1,26 @@
 # Running PostgreSQL in Docker
 ## Tasks
+### Research how to run PostgreSQL in a Docker container
+Using docker-compose.yml, define db under services.
+
+### Set up a docker-compose.yml file to run PostgreSQL
+Here's a snippet of the database configuration in docker-compose.yml, making sure to map volumes for persistent data:
+```
+db:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # persistent storage
+```
+
+### Connect to the running PostgreSQL instance using a database client (e.g., pgAdmin, psql)
 Composed container
 
 ![alt text](../Images/docker.png)
@@ -7,6 +28,9 @@ Composed container
 Connected to psql shell inside container
 
 ![alt text](../Images/psql_shell.png)
+
+### Explore how volumes persist PostgreSQL data across container restarts
+Volumes must be mounted to ensure the data is persistent. For example, in my snippet for the database connection, I mounted the volume at /var/lib/postgresql/data to make database data persistent.
 
 ## Reflection
 ### What are the benefits of running PostgreSQL in a Docker container?
