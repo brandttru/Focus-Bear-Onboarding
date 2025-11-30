@@ -143,3 +143,29 @@ I think checkout would be really useful since I often find myself making too man
 
 ### What surprised you while testing these commands?
 I was most surprised that these commands existed. I have been using git for a long time and would love to have used these in the past. Cherry-pick especially would be useful for ensuring commits are tracked correctly and in the right branch.
+
+# Debugging with git bisect
+## Tasks
+### Research git bisect and how it helps in debugging.
+`git bisect` tells you the exact commit where a bug happened. This is helpful as it assists with finding where a bug first happened, which is usually where developers go to debug.
+
+### Create a test scenario
+I created bisect_test.js where a function takes two inputs and adds them together. The bug introduced subtracts the numbers instead of adding.
+To test, I used `git bisect start`, then `git bisect bad` to mark this current commit as bad, went back and found a commit where there was no bug and marked it good with `git bisect good <commit-hash>`.
+
+![alt text](../Images/git_bisect.png)
+
+After that git checked me out to a commit, where I had to mark it good or bad. Usually it goes until the commit is found, but I found it in the first search. It was then able to tell me the commit that first introduced the bug.
+
+## Reflection
+### What does git bisect do?
+Uses binary search to find the first commit where a bug was introduced.
+
+### When would you use it in a real-world debugging situation?
+In situations where you know when something used to work, is broken now, but you don't know where it broke. 
+
+### How does it compare to manually reviewing commits?
+Manual review = O(n), where n = number of commits
+Bisect = O(log(n)), where n = number of commits
+
+Bisect is a lot faster due to its usage of binary search, which is impactful when working in large repos where there are a large amount of commits. 
