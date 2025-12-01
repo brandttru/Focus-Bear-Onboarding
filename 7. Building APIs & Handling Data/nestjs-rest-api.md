@@ -3,7 +3,12 @@
 ### Research how REST APIs are structured in NestJS
 Controllers use HTTP decorators to define route handling
 
+### Create a controller with basic CRUD routes (GET, POST, PUT, DELETE)
+This controller was previously created in app.controller.ts
+
 ### Test the endpoints using a tool like Postman or cURL
+I tried testing each of these with curl, but it soon became apparent that it did not work, especially in the VS Code terminal as this was Powershell. To solve this issue, I had to find the Invoke-RestMethod equivalent as this was native to Windows. The following screenshots of my testing include both the command used to test and the response. As app.controller.ts has a lot more CRUD routes, only 1 of each will be tested.
+
 Create new user:
 
 ![alt text](../Images/create_new_user.png)

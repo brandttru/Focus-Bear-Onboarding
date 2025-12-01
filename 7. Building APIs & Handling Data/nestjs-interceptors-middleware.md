@@ -5,10 +5,61 @@ Built in interceptors handle common concerns such as serializaiton, logging, cac
 `ClassSerializerInterceptor` automatically transforms and serialises class instances being returned by controller before sending them as HTTP responses. This is used because returned class instances are sent as raw JSON, which means fields are exposed unintentionally. The interceptor will prevent and allow certain things from being returned.
 
 ### Implement a simple logging interceptor to log request and response data
+The logging interceptor can be found in logging.interceptor.ts and it was applied globally in app.module.ts
+```
+@Injectable()
+export class LoggingInterceptor implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const req = context.switchToHttp().getRequest();
+    const res = context.switchToHttp().getResponse();
+    const method = req.method;
+    const url = req.url;
+
+    console.log(`Incoming Request: ${method} ${url}`);
+
+    const now = Date.now();
+
+    return next.handle().pipe(
+      tap((responseData) => {
+        const responseTime = Date.now() - now;
+        const statusCode = res.statusCode;
+        console.log(
+          `Response for ${method} ${url} - Status: ${statusCode} - ${responseTime}ms:`,
+          responseData,
+        );
+      }),
+    );
+  }
+}
+```
+
+To test it I sent a response to getUsers(). It responded with all the users in terminal, showing that this is the data we expect from this route.
+
 ![alt text](../Images/log_interceptor.png)
 
 ### Create a middleware function and apply it globally or to specific routes
-Middleware working in tandem with interceptor
+The middleware can be found in logging.middleware.ts and it was applied globally in app.module.ts.
+```
+@Injectable()
+export class LoggingMiddleware implements NestMiddleware {
+  use(req: Request, res: Response, next: NextFunction) {
+    console.log(`[Middleware] ${req.method} ${req.originalUrl}`);
+    console.log(`[Middleware] Headers: ${JSON.stringify(req.headers)}`);
+    next();
+  }
+}
+```
+
+It is important that '*' is passed in forRoutes() to ensure the middleware is active for all routes.
+```
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggingMiddleware).forRoutes('*'); // all routes
+  }
+}
+```
+
+Middleware working in tandem with interceptor and its reponse is shown in the below screenshot. Middleware logs can be identified by the [Middleware] tag.
 
 ![alt text](../Images/middleware.png)
 

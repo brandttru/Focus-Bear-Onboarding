@@ -27,7 +27,6 @@ export class AppService implements OnModuleInit {
   async addTask(name: string) {
     // Add to BullMQ
     const job = await this.taskQueue.add('process-task', { name });
-
     return { jobId: job.id };
   }
 

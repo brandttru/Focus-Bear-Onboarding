@@ -11,6 +11,15 @@ How it works:
 It is useful because it offloads tasks to the background. It is scalable as workers can be created to handle additional job queues. It is reliable as it jobs persist. 
 
 ### Create a simple job queue and process a background task
+For my setup I created a createTask() method in controller and in service I put the logic for adding a task to the queue, making sure to inject a task queue into the service. The task that was created was a dummy task with just a name.
+```
+  async addTask(name: string) {
+    // Add to BullMQ
+    const job = await this.taskQueue.add('process-task', { name });
+    return { jobId: job.id };
+  }
+```
+
 By sending this request:
 
 ![alt text](../Images/send_request.png)
@@ -30,7 +39,7 @@ Because of its use of queues, BullMQ is quicker at handling tasks, whereas API h
 Redis's data structure is responsible for the actual queueing of jobs in BullMQ. Since Redis supports atomic commands, multiple operations can be done without race conditions.
 
 ### What happens if a job fails? How can failed jobs be retried?
-THe job will move to the failed list where it can be restarted. During this time workers will continue processing other jobs without any blockers. BullMQ allows for specification to retry a job automatically, otherwise it will remain in the failed list.
+The job will move to the failed list where it can be restarted. During this time workers will continue processing other jobs without any blockers. BullMQ allows for specification to retry a job automatically, otherwise it will remain in the failed list.
 
 ### How does Focus Bear use BullMQ for background tasks?
 BullMQ would be used for time consuming tasks such as sending notifications, processing analytics or syncing data. This is useful as it does not take up time from a user request, improving app responsiveness and reliability.
