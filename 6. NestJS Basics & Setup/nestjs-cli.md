@@ -7,6 +7,12 @@ Created a new app using CLI under nestapp
 `nest generate` - uses schematics to scaffold or modify files. Can help generate modules, controllers, providers etc
 `nest build` - compiles the NestJS app for deployment
 
+Below is a screeenshot of some of the files (app.controller.ts, app.module.ts, app.service.ts, main.ts, app.controller.spec.ts, app.e2e.spec.ts) that were generated.
+
+![alt text](../Images/nest_cli.png)
+
+Overall, there were no issues as CLI simplified the process of creating a NestJS app.
+
 ### Understand how the CLI helps with the modular architecture of NestJS
 Since CLI scaffolds an app, it can help ensure that the modular architecture of NestJS is upheld. It can also automatically wire dependencies when generating controller, modules, providers etc, reducing human error.
 

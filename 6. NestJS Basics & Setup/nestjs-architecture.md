@@ -18,6 +18,12 @@ NestJS extends TypeScript's decorator capabilities using reflect-metadata, a lib
 - @Injectable
     - Can be managed by NestJS dependency injection logic
 
+### Create a simple module with a controller and a service
+I created a controller in app.controller.ts and service in app.service.ts that contains all logic for tasks for this onboarding repo. These were in injected into module. Under controllers for the controller and under providers for the service. This meant that my app would run with the controller and service. By creating these I was better able to understand the workings of the NestJS architecture and feel confident in using it in the future.
+
+### Explore how NestJS handles dependency injection with providers
+Providers can be injected into controllers to handle business logic, instead of leaving it all to controllers.
+
 ## Reflection
 ### What is the purpose of a module in NestJS?
 Modules organise and encapsulate parts of the app into cohesive units. This allows better organisation, dependency management, scalability and reusability.

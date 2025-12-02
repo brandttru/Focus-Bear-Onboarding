@@ -12,6 +12,15 @@ describe('AppService', () => {
   let appService: AppService;
   let httpServiceMock: { get: jest.Mock };
 
+  const userRepositoryMock = {
+    find: jest.fn(),
+    findOne: jest.fn(),
+    create: jest.fn(),
+    save: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+  };
+
   beforeEach(async () => {
     httpServiceMock = {
       get: jest.fn(),
@@ -31,14 +40,7 @@ describe('AppService', () => {
         // Mock TypeORM repository
         {
           provide: getRepositoryToken(User),
-          useValue: {
-            find: jest.fn(),
-            findOne: jest.fn(),
-            save: jest.fn(),
-            create: jest.fn(),
-            update: jest.fn(),
-            delete: jest.fn(),
-          },
+          useValue: userRepositoryMock,
         },
         // Mock PinoLogger
         {
@@ -64,4 +66,14 @@ describe('AppService', () => {
   it('getHello() should return "Hello World!"', () => {
     expect(appService.getHello()).toBe('Hello World!');
   });
+
+  it('should return all users when getAllUsers is called', async () => {
+    const expectedUsers = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+    userRepositoryMock.find.mockResolvedValue(expectedUsers);
+
+    const users = await appService.getAllUsers();
+
+    expect(users).toEqual(expectedUsers);
+    expect(userRepositoryMock.find).toHaveBeenCalledTimes(1);
+  }); 
 });

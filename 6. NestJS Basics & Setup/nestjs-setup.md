@@ -1,8 +1,17 @@
 # Setting Up a NestJS Project
 ## Task
+### Research the steps to set up a new NestJS project
+There are many different ways to set up a new project: manually, CLI, etc. Depending on which one you use, some will be harder than others.
+
 ### Install required dependencies and initialize a NestJS project
-Since I did docker-nestjs first, the application has already been made.
+Using CLI, I set up my project wtih the default structure. All default dependencies are already installed this way.
 ![alt text](../Images/nestjs_docker.png)
+
+### Explore the default project structure (modules, controllers, services, main.ts)
+I noticed that controller and service was already injected. This is helpful as it means I can get straight into coding logic without worrying/forgetting about this key step to integrating all components of the app together.
+
+### Run the development server and test a simple endpoint
+I ran the project using `npm run start:dev` and as expected the default endpoint showed "Hello World!", confirming that the controller, service and module are all wired together correctly.
 
 ## Reflection
 ### What files are included in a default NestJS project?
