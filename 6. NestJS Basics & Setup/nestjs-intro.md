@@ -8,6 +8,10 @@
 - Services
     - Handle business logic and data manipulation, used by controllers
 
+Here is an example of my project structure with the different modules, controllers and services:
+
+![alt text](../Images/nest_cli.png)
+
 ### Find out how decorators (@Controller(), @Injectable()) work in NestJS
 - `@Controller`
     - Marks a class as a controller that will handle incoming and outgoing HTTP requests

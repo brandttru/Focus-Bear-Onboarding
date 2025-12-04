@@ -1,6 +1,4 @@
 # Identifying & Fixing Code Smells
-The following examples have been generated with ChatGPT
-
 ### Magic Numbers & Strings
 ```
 if user_age > 18:  # What does 18 mean?

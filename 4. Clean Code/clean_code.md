@@ -193,93 +193,135 @@ It made the function overall have less responsiblity, insteading breaking it up 
 DRY refers to the expectation that you minimise copying code throughout a codebase. It ensures that code is cleaner, simplier to read and more flexible in terms of extension.
 
 ### Example of DRY code
-Generated using ChatGPT
+An example of DRY code can be found [here](https://gist.githubusercontent.com/NyaGarcia/7f19fcd5211dc9b99fa1a957c9219f68/raw/f7d2f7b71393bc07d8731a087fd043d0f982d5fd/duplication.js)
 ```
-# Calculate area of rectangles
-length1, width1 = 5, 10
-area1 = length1 * width1
-print(f"Area 1: {area1}")
+function getJavascriptNews() {
+    const allNews = getNewsFromWeb();
+    const news = [];
+ 
+    for (let i = allNews.length - 1; i >= 0; i--){
+        if (allNews[i].type === "javascript") {
+            news.push(allNews[i]);
+        }
+    }
+ 
+    return news;
+}
+ 
+function getRustNews() {
+    const allNews = getNewsFromWeb();
+    const news = [];
+ 
+    for (let i = allNews.length - 1; i >= 0; i--){
+        if (allNews[i].type === "rust") {
+            news.push(allNews[i]);
+        }
+    }
+ 
+    return news;
+}
 
-length2, width2 = 7, 3
-area2 = length2 * width2
-print(f"Area 2: {area2}")
+function getGolangNews() {
+  const news = [];
+  const allNews = getNewsFromWeb();
 
-length3, width3 = 2, 8
-area3 = length3 * width3
-print(f"Area 3: {area3}")
+  for (let i = allNews.length - 1; i >= 0; i--) {
+    if (allNews[i].type === 'golang') {
+      news.push(allNews[i]);
+    }
+  }
+
+  return news;
+}
 ```
 
 ### What were the issues with duplicated code?
-The reason why this code violates DRY is that it copy and pastes the same code while only making minimal changes. This can be problematic as if I wanted to calculate areas of other rectangles I would have to copy and paste again. This is inefficient and will take up more space than necessary.
+The reason why this code violates DRY is that it copy and pastes the same code while only making minimal changes. All these functions serve a similar purpose (getting the type of news) and as such it is unnecessary to repeat them. Combing these into one function and can improve reusability and scalability.
 
 ### How did refactoring improve maintainability?
 ```
-def rectangle_area(length, width):
-    return length * width
+function getNewsByType(type) {
+  const allNews = getNewsFromWeb();
+  const news = [];
 
-areas = [
-    rectangle_area(5, 10),
-    rectangle_area(7, 3),
-    rectangle_area(2, 8)
-]
+  for (let i = allNews.length - 1; i >= 0; i--) {
+    if (allNews[i].type === type) {
+      news.push(allNews[i]);
+    }
+  }
 
-for i, area in enumerate(areas, start=1):
-    print(f"Area {i}: {area}")
+  return news;
+}
 ```
 
-The refractored version is a lot more maintainable because it now uses a function meaning that it is open to extension. It being open to extension means that it is easier to maintain and use in future. It will also be easier to debug, since if there were an issue with the original code you would have to go back and fix all instances of the copied code. Instead, by having one instance of the code bug fixes only need to be made once.
+By making use of parameters, we can instead refactor the function to be accepting of any new types of news. This means that any other types of news besides the previous 3 can be retrieved without having to make new functions each time. Overall, the code is much more scalable.
 
 # Refactoring Code for Simplicity
 ### Find an example of overly complicated code in an existing project (or write your own).
-Generated using ChatGPT
+I wrote my own code for returning error status messages.
 ```
-def check_number(num):
-    if num > 0:
-        return "Positive"
-    else:
-        if num < 0:
-            return "Negative"
-        else:
-            if num == 0:
-                return "Zero"
+function getStatusMessage(code) {
+  if (code === 200) {
+    return "OK";
+  } else {
+    if (code === 400) {
+      return "Bad Request";
+    } else {
+      if (code === 404) {
+        return "Not Found";
+      } else {
+        if (code === 500) {
+          return "Server Error";
+        } else {
+          return "Unknown";
+        }
+      }
+    }
+  }
+}
 ```
 
 ### What made the original code complex?
-This is more complex than necessary because it is over engineered. There are unnecessary conditions in the if statements (having conditions for all the ifs implies another condition that satisfies none of the ifs) and also unnecessary nested if. This makes it harder to read the code and in more complex code can make it harder to understand, hindering development process.
+This is more complex than necessary because it is over engineered. There are unnecessary conditions if else statements that are also nested within each other. This makes it harder to read the code and in more complex code can make it harder to understand, hindering development process.
 
 ### How did refactoring improve it?
 ```
-def check_number(num):
-    if num > 0:
-        return "Positive"
-    elif num < 0:
-        return "Negative"
-    else:
-        return "Zero"
+function getStatusMessage(code) {
+  const messages = {
+    200: "OK",
+    400: "Bad Request",
+    404: "Not Found",
+    500: "Server Error",
+  };
+
+  return messages[code] || "Unknown";
+}
 ```
 
-Refactoring has made it a lot simpler, removing the nested ifs and also the unnecessary conditions. From the refactored version it is easier to see that numbers greater than 0 are positive, numbers smaller than 0 are negative and that if its neither than it will be "Zero". This removes the implication from having the unnecessary coniditon and makes it easier to understand what the conditions are.
+Refactoring has made it a lot simpler, removing the nested ifs and also the unnecessary conditions. From the refactored version it is easier to see which error number corresponds to which message. Indentation in this function also makes it a lot easier to read. The function is now easier to read and it is easier to see what the expected outcome would/should be.
 
 # Commenting & Documentation
 ### Find an example of poorly commented code and rewrite the comments to be more useful.
-This is poor documentation
+An example of poorly commented code can be found [here](https://refine.dev/blog/code-comments/#the-bad-when-comments-are-a-liability).
 ```
-def calc(x, y):
-    # do stuff
-    result = x * y + 10  # calculate
-    return result  # return it
+// This is a class for a Car
+class Car {
+  // constructor
+  constructor() {
+    // ...
+  }
+}
 ```
 
 Can be improved by
 ```
-def calc(x, y):
-    ```
-    Multiply x and y, then add 10 to the result
-    ```
-    result = x * y + 10
-    return result
+class Car {
+  constructor() {
+    // ...
+  }
+}
 ```
-This is improved as it clearly defines what the function does and does not include unnecessary comments
+We do not need to state the obvious when commenting. Comments in the constructor may be useful here depending on any inheritance, again this should be used sparringly and not state the obvious.
 
 ### When should you add comments?
 Comments should only be added when necessary. Such as when it may be hard to understand what part of the code is doing what or it is unclear why you do something. They shouldn't constantly be used as it will reduce readability of code.
@@ -327,6 +369,33 @@ The code now is able to check for if inputs are numbers, as well as if b=0, thus
 Handling errors makes code more reliable as it can provide predictable behaviour. In the example, a user would expect the system to not be able to divide by 0 and thus by having that error handling, a user's experience is not affected as it was the expected behaviour. It can also make debugging easier when we know where errors could occur and what errors specifically.
 
 # Writing Unit Tests for Clean Code
+### Choose a testing framework
+I will be using pytest for my tests of Unit Testing/factorial.py. The tests can be found in test_factorial.py
+
+### Write a few unit tests for a function in your test repo.
+I have created some basic tests for returning the factorial of an input.
+```
+def test_factorial_basic(): // normal inputs
+    assert factorial(0) == 1
+    assert factorial(1) == 1
+    assert factorial(5) == 120
+    assert factorial(7) == 5040
+
+def test_factorial_large_number(): // edge case
+    assert factorial(10) == 3628800
+
+def test_factorial_invalid_type(): // error case
+    with pytest.raises(ValueError, match="Input must be an integer."):
+        factorial(5.5)
+
+def test_factorial_negative_input(): // error case
+    with pytest.raises(ValueError, match="Input must be non-negative."):
+        factorial(-3)
+```
+
+The output of the test looks like this and all tests passed.
+![alt text](../Images/pytest.png)
+
 ### How do unit tests help keep code clean?
 Unit tests are important as they can help discern any problematic code and encourage refactoring of code. For example, testing a large function can reveal it has too many responsibilities and dependencies and as such it may be better to break it down by responsibility. It can also catch edge cases, thus encouraging a developer to write better code that can handle edge cases.
 
