@@ -16,6 +16,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
 import { AuthModule } from './auth/auth.module';
 import { HttpModule } from '@nestjs/axios';
+import { PrivateController } from './auth.controller';
 
 @Module({
   imports: [
@@ -65,7 +66,7 @@ import { HttpModule } from '@nestjs/axios';
     AuthModule,
     HttpModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, PrivateController],
   providers: [
     AppService,
     AppProcessor,
