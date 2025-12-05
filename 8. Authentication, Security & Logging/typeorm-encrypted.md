@@ -3,6 +3,68 @@
 ### Research how typeorm-encrypted works and why it’s needed
 It is a library that integrates TypeORM to enable encryption of specific columns in database entities. A transformer class handles the logic of encryption and the subscribers will use the transformer when listening to entity events and apply encryption. Used to hide sensitive data easily.
 
+### Implement typeorm-encrypted in a NestJS entity
+An encryption transformer was created in encryption.config.ts
+```
+const config = new ConfigService();
+
+export const encryptionTransformer = new EncryptionTransformer({
+  key: config.get<string>('ENCRYPTION_KEY')!,
+  algorithm: 'aes-256-cbc',
+  ivLength: 16,
+});
+```
+
+Additionally, the entity had to make make use of it where encryption was expected.
+```
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  name: string;
+
+  @Column({
+    type: 'varchar',
+    nullable: true,
+    transformer: encryptionTransformer,
+  })
+  socialSecurityNumber: string;
+
+  @Column({
+    type: 'varchar',
+    nullable: true,
+    transformer: encryptionTransformer,
+  })
+  creditCardNumber: string;
+}
+```
+
+### Understand how encryption keys are managed and stored
+To ensure my encryption worked, an encryption key was created and stored in .env. To use it I used config to retrive the value from .env
+
+### Test encrypting and decrypting a database field
+Using Bruno, I tested adding a user with an encrypted field.
+
+![alt text](../Images/encrypted.png)
+
+To check that it was encrypted in the database, I created a method in service that would return all users straight from the database without parsing, so we can see what they look like stored.
+
+```
+  async getRawUsers() {
+    // Query raw database without TypeORM transformers
+    const raw = await this.userRepo.query(
+      'SELECT * FROM users',
+    );
+    return raw;
+  }
+```
+
+As can be seen in the screenshot, the user's SSN and credit card number are encrypted
+
+![alt text](../Images/encrypted_user.png)
+
 ## Reflection
 ### Why does Focus Bear double encrypt sensitive data instead of relying on database encryption alone?
 - An extra layer of security is added

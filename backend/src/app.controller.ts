@@ -55,6 +55,11 @@ export class AppController {
     return this.appService.getUser(id);
   }
 
+  @Get('users/raw') // used to see encrypted values
+  async getRawUsers() {
+    return this.appService.getRawUsers();
+  }
+
   @Post('users')
   @HttpCode(HttpStatus.CREATED)
   async createUser(@Body() body: CreateUserDto) {

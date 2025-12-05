@@ -57,6 +57,11 @@ export class AppService implements OnModuleInit {
     return user;
   }
 
+  async getRawUsers() {
+    // Query raw database without TypeORM transformers
+    return await this.userRepo.manager.query('SELECT * FROM "user"');
+  }
+
   async updateUser(
     id: string,
     updates: {

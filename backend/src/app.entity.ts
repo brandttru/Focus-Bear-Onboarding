@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { encryptionTransformer } from './encryption.config';
-import { EncryptionTransformer } from 'typeorm-encrypted';
 
 @Entity()
 export class User {
@@ -13,14 +12,14 @@ export class User {
   @Column({
     type: 'varchar',
     nullable: true,
-    transformer: new EncryptionTransformer(encryptionTransformer),
+    transformer: encryptionTransformer,
   })
   socialSecurityNumber: string;
 
   @Column({
     type: 'varchar',
     nullable: true,
-    transformer: new EncryptionTransformer(encryptionTransformer),
+    transformer: encryptionTransformer,
   })
   creditCardNumber: string;
 }
